@@ -2,14 +2,14 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-<h1 class="display-1 text-primary text-center">Contact Us</h1>
+<h1 class="display-1 text-dark text-center">Contact Us</h1>
 
 <form  method="post" action="{{ route('contact-us') }}">
 
     @csrf
 
     <div class="form-group">
-        <label>Name</label>
+        <label >Name</label>
         <input type="text" class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="name" id="name">
 
         <!-- Error -->
@@ -21,7 +21,7 @@
     </div>
 
     <div class="form-group">
-        <label>Email</label>
+        <label >Email</label>
         <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email" id="email">
 
         @if ($errors->has('email'))
@@ -32,7 +32,7 @@
     </div>
 
     <div class="form-group">
-        <label>Phone</label>
+        <label >Phone</label>
         <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone" id="phone">
 
         @if ($errors->has('phone'))
@@ -43,7 +43,7 @@
     </div>
 
     <div class="form-group">
-        <label>Message</label>
+        <label >Message</label>
         <textarea class="form-control {{ $errors->has('message') ? 'error' : '' }}" name="message" id="message"
             rows="4"></textarea>
 
@@ -65,3 +65,11 @@
 
 </div>
 @endsection
+
+
+
+
+
+
+
+
