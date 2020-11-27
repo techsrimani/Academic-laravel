@@ -7,28 +7,27 @@
 
 
     <div class="container">
-    @foreach($contactUs as $contact)
+        @foreach ($contactUs as $contact)
 
-    <div class="card p-3 mt-4">
+            <div class="card p-3 mt-4">
 
-                <h3 class="card-header"><strong>Name  :</strong> {{ $contact->name }}</h3>
+                <h3 class="card-header"><strong>Name :</strong> {{ $contact->name }}</h3>
                 <div class="card-body">
-            <h3 ><strong>From  : </strong>{{$contact->email}}</h3>
-                <p><strong>Message  : </strong>{{ $contact->message }}</p>
-                <p><strong>Submitted At  : </strong>{{ $contact->created_at }}</p>
-                <div class="card-link">
+                    <h3><strong>From : </strong>{{ $contact->email }}</h3>
+                    <p><strong>Message : </strong>{{ $contact->message }}</p>
+                    <p><strong>Submitted At : </strong>{{ $contact->created_at }}</p>
+                    <div class="card-link">
 
+                    <a href="{{ route('contact.reply',$contact->id) }}" class="btn btn-primary">Reply</a>
+                    </div>
                 </div>
-            </div>
 
             </div>
 
-
-
-@endforeach
-<div class="d-flex justify-content-center">
-    {{$contactUs->links()}}
-</div>
+        @endforeach
+        <div class="d-flex justify-content-center">
+            {{ $contactUs->links() }}
+        </div>
     </div>
 
 

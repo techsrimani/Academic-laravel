@@ -20,6 +20,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+//contact us
+
 Route::get('/contact-us', [App\Http\Controllers\ContactUsController::class, 'create'])->name('contact-us');
-Route::get('/contact-requests', [App\Http\Controllers\ContactUsController::class, 'index'])->name('contact-requests');
+Route::get('/contact-requests', [App\Http\Controllers\ContactUsController::class, 'index'])->name('contact-requests')->middleware('auth');;
 Route::post('/contact-us', [App\Http\Controllers\ContactUsController::class, 'store'])->name('contact-us');
+Route::get('/contact-reply/{id}', [App\Http\Controllers\ContactUsController::class, 'replyView'])->name('contact.reply');
+
+//jobs
+Route::get('/apply-job', [App\Http\Controllers\JobsSubmissionController::class, 'create'])->name('apply-job');
+
