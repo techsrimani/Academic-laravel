@@ -71,7 +71,11 @@ class ContactUsController extends Controller
             'message'   =>   $request->message
         );
 
+<<<<<<< Updated upstream
         Mail::send(new ContactUsMail($data));
+=======
+      // Mail::send(new ContactUsMail($data));
+>>>>>>> Stashed changes
 
         return redirect()->back()->with('success', 'Thanks a lot your message means a lot to us!');
     }
