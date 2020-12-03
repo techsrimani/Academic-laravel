@@ -17,7 +17,7 @@ class ContactUsController extends Controller
 
     public function index()
     {
-        $contactUs =  ContactUs::latest()->simplePaginate(10);;
+        $contactUs =  ContactUs::latest()->simplePaginate(10);
 
         return view('contact_submissions', ['contactUs' => $contactUs]);
     }
