@@ -18,11 +18,7 @@
                     <p><strong>Submitted At : </strong>{{ $contact->created_at }}</p>
                     <div class="card-link">
 
-<<<<<<< Updated upstream
                     <a href="{{ route('contact.reply',$contact->id) }}" class="btn btn-primary">Reply</a>
-=======
-                    <!-- <a href="{{ route('contact.reply',$contact->id) }}" class="btn btn-primary">Reply</a> -->
->>>>>>> Stashed changes
                     </div>
                 </div>
 
@@ -33,8 +29,6 @@
             {{ $contactUs->links() }}
         </div>
     </div>
-<<<<<<< Updated upstream
-=======
     <style>
 body {
 	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
@@ -106,8 +100,8 @@ form input[type="password"]:focus {
 input[type=submit] {
 	padding:15px 50px;
     width:auto;
-    background: #ED0EF8;  
-	
+    background: #ED0EF8;
+
 	border:none;
 	color:white;
 	cursor:pointer;
@@ -148,7 +142,6 @@ input[type=submit]:hover {
 	color:cornflowerblue;
 }
        </style>
->>>>>>> Stashed changes
 
 
 @endsection

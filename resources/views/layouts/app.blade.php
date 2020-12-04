@@ -202,6 +202,10 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="careers">Careers</a>
+                        </li>
+
 
                         @guest
                             @if (Route::has('login'))
@@ -220,6 +224,10 @@
 
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('contact-requests') }}">Contact Submissions</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="job-applications">job Submissions</a>
                             </li>
 
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
@@ -302,9 +310,6 @@
             <h6 class="ft-legal-list">&copy; 2020 Copyright Shreshta services Pvt ltd.</h6>
         </section>
     </footer>
-<<<<<<< Updated upstream
-
-=======
     <script>
         $(document).ready(function(){
 	$('.hamburger-shell').click(function(){
@@ -323,7 +328,6 @@
 	})
 });
     </script>
->>>>>>> Stashed changes
 </body>
 
 
