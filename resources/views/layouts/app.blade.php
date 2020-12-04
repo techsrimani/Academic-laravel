@@ -13,10 +13,7 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<<<<<<< Updated upstream
-=======
-    
->>>>>>> Stashed changes
+
     <script src="https://kit.fontawesome.com/981794e91c.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
@@ -162,7 +159,7 @@
 
 <body>
     <div id="app">
-   
+
 
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
@@ -186,7 +183,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                    
+
                     <div class="bg-cover"></div>
                     <a class="hamburger-shell">
 	<div class="hamb top"></div>
@@ -195,12 +192,12 @@
 
 <ul id="menu">
 		<a href="#"> <li>Home</li></a>
-		
+
 		<a href="#"> <li>About Us</li></a>
 		<a href="#"> <li>Career</li></a>
 		<a href="#"> <li>Contact</li></a>
 </ul>
-</a>	
+</a>
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
