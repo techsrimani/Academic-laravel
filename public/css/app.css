@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Nunito);@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Nunito);@import url(https://fonts.googleapis.com/css?family=Montserrat);@charset "UTF-8";
 
 /*!
  * Bootstrap v4.5.3 (https://getbootstrap.com/)
@@ -10909,6 +10909,21 @@ a.text-dark:focus {
   box-sizing: border-box;
 }
 
+<<<<<<< Updated upstream
+=======
+.navbar {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  z-index: 1 !important;
+  background: white;
+}
+
+.navbar .navbar-expand-md {
+  padding: 10px 0;
+}
+
+>>>>>>> Stashed changes
 ul {
   list-style: none;
   padding-left: 0;
@@ -11009,3 +11024,10 @@ body {
   justify-content: center;
 }
 
+<<<<<<< Updated upstream
+=======
+.text-primary {
+  font-size: 1rem;
+}
+
+>>>>>>> Stashed changes

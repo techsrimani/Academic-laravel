@@ -13,6 +13,10 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<<<<<<< Updated upstream
+=======
+    
+>>>>>>> Stashed changes
     <script src="https://kit.fontawesome.com/981794e91c.js" crossorigin="anonymous"></script>
 
     <!-- Fonts -->
@@ -21,18 +25,152 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        .reveal {
+	opacity: .85;
+	display: block;
+	pointer-events: auto;
+	visibility: visible;
+}
+
+.hamburger-shell {
+	margin: 0;
+	position: fixed;
+	overflow: hidden;
+	width: 70px;
+	height: 100px;
+	overflow: auto;
+	left: calc(100% - 100px);
+	top: 20px;
+	cursor: pointer;
+}
+
+.top, .middle{
+	position: absolute;
+	width: 62px;
+	height: 10px;
+    background-color: lightgrey;
+	transition: all 350ms ease-in-out;
+	top: 20px;
+}
+
+.middle {
+	top: 40px;
+}
+
+#menu {
+	position: fixed;
+	left: calc(100% - 290px);
+	top: 10px;
+	color: black;
+	display: none;
+	margin: 120px 30px;
+	text-decoration: none;
+	font-family: Arial, sans-serif;
+	font-weight: 100;
+	font-size: 20px;
+	text-transform: uppercase;
+	color: #333;
+	padding: 24px;
+	width: 200px;
+	text-align: right;
+}
+
+
+#menu a li {
+	text-decoration: none!important;
+	padding-bottom: 10px;
+	margin-bottom: 12px;
+	border-bottom: 1px solid black;
+	list-style: none;
+	color: #555;
+	transition: all 150ms ease;
+}
+
+#menu a li:hover {
+	color: #00abff;
+	padding-right: 3px;
+}
+
+#menu a li:hover:after {
+}
+
+
+
+#menu a {
+	text-decoration: none;
+}
+.rotate {
+	transform: rotate(225deg);
+	-webkit-transform: rotate(225deg);
+	top: 30px;
+	background-color: red;
+	height: 2px;
+}
+.bg-cover {
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: tomato;
+	z-index: 0;
+	transition: all 350ms ease;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+}
+
+.rotate-back {
+	transform: rotate(-225deg);
+	-webkit-transform: rotate(-225deg);
+	top: 30px;
+	background-color: red;
+	height: 2px;
+}
+
+.top {
+-webkit-animation-delay: 100ms;
+}
+
+.middle {
+-webkit-animation-delay: 250ms;
+}
+
+.bottom {
+	-webkit-animation-delay: 400ms;
+}
+
+.menu-name {
+	font-family: Verdana;
+	font-weight: 900;
+	color: black;
+	font-size: 19.5px;
+	text-decoration: none;
+	position: absolute;
+	top: 56px;
+	left: -1px;
+	transition: all 350ms;
+}
+
+.bump {
+	top: 64px;
+	color: red;
+}
+        </style>
 </head>
 
 <body>
     <div id="app">
+   
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <div class="panel-body">
-                        <img src="{{ asset('/images/academic-logo.webp') }}">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <div class="panel-body">
+                    <img src="{{ asset('/images/academic-logo.webp') }}">
                     </div>
-                </a>
+            </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -48,6 +186,21 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+                    
+                    <div class="bg-cover"></div>
+                    <a class="hamburger-shell">
+	<div class="hamb top"></div>
+		<div class="hamb middle"></div>
+	<div class="menu-name"></div>
+
+<ul id="menu">
+		<a href="#"> <li>Home</li></a>
+		
+		<a href="#"> <li>About Us</li></a>
+		<a href="#"> <li>Career</li></a>
+		<a href="#"> <li>Contact</li></a>
+</ul>
+</a>	
                         <!-- Authentication Links -->
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('contact-us') }}">Contact Us</a>
@@ -152,7 +305,28 @@
             <h6 class="ft-legal-list">&copy; 2020 Copyright Shreshta services Pvt ltd.</h6>
         </section>
     </footer>
+<<<<<<< Updated upstream
 
+=======
+    <script>
+        $(document).ready(function(){
+	$('.hamburger-shell').click(function(){
+		$('#menu').slideToggle(300);
+		$('.top').toggleClass('rotate');
+		$('.middle').toggleClass('rotate-back');
+		$('.menu-name').toggleClass('bump');
+		$('.bg-cover').toggleClass('reveal');
+	});
+	$('.bg-cover').click(function(){
+		$('#menu').slideToggle(300);
+		$('.top').toggleClass('rotate');
+		$('.middle').toggleClass('rotate-back');
+		$('.menu-name').toggleClass('bump');
+		$('.bg-cover').toggleClass('reveal');
+	})
+});
+    </script>
+>>>>>>> Stashed changes
 </body>
 
 
