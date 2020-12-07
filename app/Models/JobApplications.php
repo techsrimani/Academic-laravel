@@ -14,4 +14,5 @@ class JobApplications extends Model
     public function educationDetails(){
         return $this->hasMany('App\Models\EducationDetails');
     }
+
 }

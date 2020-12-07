@@ -75,4 +75,12 @@ class ContactUsController extends Controller
 
         return redirect()->back()->with('success', 'Thanks a lot your message means a lot to us!');
     }
+
+    public function destroy($id)
+    {
+        $contactUs =  ContactUs::find($id);
+        $contactUs->delete();
+        return redirect()->route('contact-requests')
+                        ->with('success','Product deleted successfully');
+    }
 }

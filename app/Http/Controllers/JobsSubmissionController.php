@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EducationDetails;
 use App\Models\JobApplications;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class JobsSubmissionController extends Controller
 {
@@ -63,8 +64,8 @@ class JobsSubmissionController extends Controller
             'present_pincode' => 'required|numeric|max:999999',
             'present_country' => 'required',
             //dynamic field validation
-             'addmore.*.degree' => 'required|max : 30',
-            'addmore.*.school' => 'required| max:50',
+            'addmore.*.degree' => 'required|max : 30',
+            'addmore.*.institute' => 'required| max:50',
             'addmore.*.year' => 'required|numeric|max:2021',
             'addmore.*.aggregate' => 'required|numeric|max:100',
             'addmore.*.remarks' => 'required|max:190',
@@ -338,4 +339,15 @@ class JobsSubmissionController extends Controller
 
         return redirect()->back()->with('success', 'Thanks for applying we will get back to you in a sometime! Good day');
     }
+
+    public function destroy($id)
+    {
+        $job =  JobApplications::find($id);
+        File::delete(public_path('public/images/') . $job->photo);
+        $job->delete();
+        return redirect()->route('job-applications')
+                        ->with('success','Product deleted successfully');
+    }
+
+
 }

@@ -154,6 +154,33 @@
 	top: 64px;
 	color: red;
 }
+.fade-in {
+  animation: fadeIn ease 3s;
+  -webkit-animation: fadeIn ease 3s;
+  -moz-animation: fadeIn ease 3s;
+  -o-animation: fadeIn ease 3s;
+  -ms-animation: fadeIn ease 3s;
+}
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
         </style>
 </head>
 
@@ -164,9 +191,9 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
             <a class="navbar-brand" href="{{ url('/') }}">
-                <div class="panel-body">
+                <div class="fade-in">
                     <img src="{{ asset('/images/academic-logo.webp') }}">
-                    </div>
+    </div>
             </a>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"

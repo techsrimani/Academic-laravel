@@ -6,36 +6,28 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-<<<<<<< Updated upstream
-=======
 @import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 
 
->>>>>>> Stashed changes
 
 
 * {
     margin: 0;
     padding: 0;
-<<<<<<< Updated upstream
     box-sizing: border-box;
-    }
-=======
-    box-sizing: border-box; 
     }
     .navbar {
       position: sticky;
       position: -webkit-sticky;
       top: 0;
-    z-index: 1 !important; 
+    z-index: 1 !important;
     background:white;
   }
-  
+
   .navbar .navbar-expand-md {
     padding: 10px 0;
   }
->>>>>>> Stashed changes
     ul {
       list-style: none;
       padding-left: 0;
@@ -49,17 +41,11 @@
       text-decoration: none;
       color: #eee;
     }
-<<<<<<< Updated upstream
+
     .ft-anchor-element:hover {
       text-decoration: none;
       color:#0DDBFE
-=======
-    
-    .ft-anchor-element:hover {
-      text-decoration: none;
-      color:#0DDBFE
-    
->>>>>>> Stashed changes
+
     }
     .ft-title {
       color: #fff;
@@ -97,10 +83,7 @@
       min-width: 12.5rem;
       text-align: center;
     }
-<<<<<<< Updated upstream
-=======
-    
->>>>>>> Stashed changes
+
     /* Footer social */
     .ft-social {
       padding: 0 1.875rem 1.25rem;
@@ -122,23 +105,16 @@
     }
     .ft-legal-list {
     background-image: linear-gradient(to  bottom left, rgba(13, 219, 254, 1), rgba(237, 14, 248, 1));
-<<<<<<< Updated upstream
     color:#000;
-=======
-    color:#000; 
->>>>>>> Stashed changes
       width: 100%;
       display: flex;
       flex-wrap: wrap;
     justify-content:center;
     }
-<<<<<<< Updated upstream
-=======
-  
+
 //contact-us css
 .text-primary{
     font-size:1rem;
 }
->>>>>>> Stashed changes
 
 

@@ -10909,8 +10909,6 @@ a.text-dark:focus {
   box-sizing: border-box;
 }
 
-<<<<<<< Updated upstream
-=======
 .navbar {
   position: sticky;
   position: -webkit-sticky;
@@ -10923,7 +10921,6 @@ a.text-dark:focus {
   padding: 10px 0;
 }
 
->>>>>>> Stashed changes
 ul {
   list-style: none;
   padding-left: 0;
@@ -11024,10 +11021,7 @@ body {
   justify-content: center;
 }
 
-<<<<<<< Updated upstream
-=======
 .text-primary {
   font-size: 1rem;
 }
 
->>>>>>> Stashed changes

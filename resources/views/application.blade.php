@@ -267,7 +267,11 @@
                     {{ $application->linkedin }}
                 </a></p>
 
-
+                <form action="{{ route('job-applications.delete',$application->id) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
 
 
 
