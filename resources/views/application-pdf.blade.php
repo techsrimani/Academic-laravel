@@ -1,7 +1,6 @@
-@extends('layouts.app')
-@section('content')
-
-
+    <head>
+    <link rel="stylesheet" type="text/css" href="{{ base_path().'/location/css/bootstrap.min.css' }}">
+    </head>
     <h1 class="display-3 text-center">{{ $application->first_name . ' ' . $application->last_name }}'s application</h1>
 
     <div class="container">
@@ -9,7 +8,7 @@
 
         <div class="row shadow p-3 mb-5 bg-white rounded">
 
-            <img src="{{ URL::to('/') }}/public/images/{{ $application->photo }}" alt="..."
+            <img src="{{base_path().'/public/images/'.$application->photo }}" alt="..."
                 class="img-thumbnail col-md-3 mb-5">
             <h3 class="card-header col-md-9 mb-5"><strong>Name :</strong>
                 {{ $application->first_name . ' ' . $application->last_name }} <br>
@@ -264,15 +263,6 @@
                     {{ $application->linkedin }}
                 </a></p>
 
-            <form action="{{ route('job-applications.delete', $application->id) }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="btn btn-danger">Delete</button>
-            </form>
-            <a class="btn btn-primary" href="{{ URL::to('/application-pdf/' . $application->id) }}">Export to PDF</a>
-
         </div>
 
     </div>
-
-@endsection

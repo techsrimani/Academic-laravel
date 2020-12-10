@@ -7,6 +7,7 @@
 
 
     <div class="container">
+        <a class="btn btn-primary" href="{{ URL::to('/') }}/jobs-excel">Export Excel</a>
         @foreach ($jobApplications as $application)
 
             <div class="card p-3 mt-4">
@@ -19,8 +20,8 @@
 
                 <div class="card-body">
 
-                    <h3><strong>From : </strong>{{ $application->email }}</h3>
-                    <p><strong>Message : </strong>{{ $application->phone }}</p>
+                    <h3 ><strong>From : </strong>{{ $application->email }}</h3>
+                    <p ><strong>Message : </strong>{{ $application->phone }}</p>
                     <p><strong>Position : </strong>{{ $application->position }}</p>
                     <p><strong>Submitted At : </strong>{{ $application->created_at }}</p>
                     <a href="{{ route('applicant-details', $application->id) }}" class="btn btn-primary">view All
@@ -33,6 +34,7 @@
                         </form>
 
                     </div>
+
                 </div>
 
             </div>

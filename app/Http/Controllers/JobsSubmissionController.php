@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\JobApplicantsExport;
 use App\Models\EducationDetails;
 use App\Models\JobApplications;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use PDF;
+use Maatwebsite\Excel\Facades\Excel;
 
 class JobsSubmissionController extends Controller
 {
@@ -348,6 +352,25 @@ class JobsSubmissionController extends Controller
         return redirect()->route('job-applications')
                         ->with('success','Product deleted successfully');
     }
+
+    public function createApplicantPDF($id) {
+        // retreive all records from db
+        $job =  JobApplications::find($id);
+
+        // share data to view
+        view()->share('application',$job);
+        $pdf = PDF::loadView('application-pdf', $job);
+
+
+        // download PDF file with download method
+        return $pdf->download('pdf_view.pdf');
+      }
+
+      public function exportExcel(){
+
+        return Excel::download(new JobApplicantsExport, 'applications.xlsx');
+
+      }
 
 
 }

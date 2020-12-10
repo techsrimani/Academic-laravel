@@ -11025,3 +11025,14 @@ body {
   font-size: 1rem;
 }
 
+.navbar-light .navbar-nav .nav-link {
+  color: black;
+}
+
+.navbar-light .navbar-nav .nav-link:hover {
+  font-size: 22.7px;
+  background: linear-gradient(to bottom left, #0ddbfe, #ed0ef8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
