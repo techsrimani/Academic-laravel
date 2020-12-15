@@ -7,34 +7,22 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactUsMail extends Mailable
+class ContactusUserAcknowledgement extends Mailable
 {
     use Queueable, SerializesModels;
     public $data;
 
-
-    /**
-     * Create a new message instance.
-     *
-     * @return void
-     */
     public function __construct($data)
     {
         $this->data = $data;
     }
 
-    /**
-     * Build the message.
-     *
-     * @return $this
-     */
     public function build()
     {
         return $this->from('srimanibilla@gmail.com')
-                    ->to('srimanibilla@gmail.com')
-                    ->subject('New Customer Equiry')
+                    ->to($this->data['email'])
+                    ->subject('We have received your request')
                     ->view('contact_us_mail')
                     ->with('data', $this->data);
-
     }
 }

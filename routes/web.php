@@ -42,4 +42,5 @@ Route::get('/applicant-details/{id}', [App\Http\Controllers\JobsSubmissionContro
 Route::delete('/job-applications/{id}', [App\Http\Controllers\JobsSubmissionController::class, 'destroy'])->name('job-applications.delete')->middleware('auth');
 Route::get('/application-pdf/{id}', [App\Http\Controllers\JobsSubmissionController::class, 'createApplicantPDF'])->name('job-applications.pdf')->middleware('auth');
 Route::get('/jobs-excel', [App\Http\Controllers\JobsSubmissionController::class, 'exportExcel'])->name('jobs-excel')->middleware('auth');
+Route::get('/jobs-excel-date', [App\Http\Controllers\JobsSubmissionController::class, 'exportExcelByDate'])->name('jobs-excel.date')->middleware('auth');
 

@@ -1,6 +1,4 @@
-    <head>
-    <link rel="stylesheet" type="text/css" href="{{ base_path().'/location/css/bootstrap.min.css' }}">
-    </head>
+
     <h1 class="display-3 text-center">{{ $application->first_name . ' ' . $application->last_name }}'s application</h1>
 
     <div class="container">

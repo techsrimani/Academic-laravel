@@ -58,7 +58,7 @@
 
                 <div class="form-group col-md-6">
                     <label>Last Name</label>
-                    <input type="text" class="form-control {{ $errors->has('last_name') ? 'error' : '' }}" name="last_name">
+                    <input type="text" class="form-control {{ $errors->has('last_name') ? 'error' : '' }}" name="last_name" value="{{ old('last_name') }}" }}>
 
                     <!-- Error -->
                     @if ($errors->has('last_name'))

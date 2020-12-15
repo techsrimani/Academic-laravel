@@ -7,12 +7,10 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class ContactUsMail extends Mailable
+class JobSubmitUserMail extends Mailable
 {
     use Queueable, SerializesModels;
-    public $data;
-
-
+    public $application;
     /**
      * Create a new message instance.
      *
@@ -20,7 +18,7 @@ class ContactUsMail extends Mailable
      */
     public function __construct($data)
     {
-        $this->data = $data;
+        $this->application = $data;
     }
 
     /**
@@ -31,10 +29,9 @@ class ContactUsMail extends Mailable
     public function build()
     {
         return $this->from('srimanibilla@gmail.com')
-                    ->to('srimanibilla@gmail.com')
-                    ->subject('New Customer Equiry')
-                    ->view('contact_us_mail')
-                    ->with('data', $this->data);
-
+                    ->to($this->application->email)
+                    ->subject('We have received your Job application')
+                    ->view('job_submit_user_mail')
+                    ->with('data', $this->application);
     }
 }

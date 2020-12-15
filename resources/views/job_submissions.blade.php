@@ -7,7 +7,34 @@
 
 
     <div class="container">
-        <a class="btn btn-primary" href="{{ URL::to('/') }}/jobs-excel">Export Excel</a>
+
+        <form method="get" action="{{ route('jobs-excel.date') }}">
+            <div class="form-group">
+                <label>Start Date:</label>
+                <div class="input-group mb-3">
+                    <input  type="date"  name="from" width="276" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>End Date:</label>
+                <div class="input-group mb-3">
+                    <input type="date"   name="to" width="276" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <button type="submit" class="btn btn-primary">Export By Date Range</button>
+                </div>
+            </div>
+
+        </form>
+
+
+        <a class="btn btn-primary" href="{{ URL::to('/') }}/jobs-excel">Export All applications Excel</a>
+
+
         @foreach ($jobApplications as $application)
 
             <div class="card p-3 mt-4">

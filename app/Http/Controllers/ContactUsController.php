@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ContactUsMail;
 use App\Mail\ContactReplyMail;
+use App\Mail\ContactusUserAcknowledgement;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -55,10 +56,12 @@ class ContactUsController extends Controller
 
     public function store(Request $request)
     {
+
+
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email',
-            'phone' => 'required|integer',
+            'phone' => 'required | numeric | digits:10 | starts_with: 6,7,8,9',
             'message' => 'required'
         ]);
 
@@ -72,6 +75,7 @@ class ContactUsController extends Controller
         );
 
         Mail::send(new ContactUsMail($data));
+        Mail::send(new ContactusUserAcknowledgement($data));
 
         return redirect()->back()->with('success', 'Thanks a lot your message means a lot to us!');
     }
