@@ -7,15 +7,10 @@ use App\Mail\ContactReplyMail;
 use App\Mail\ContactusUserAcknowledgement;
 use App\Models\ContactUs;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
 class ContactUsController extends Controller
 {
-
-
-
-
     public function index()
     {
         $contactUs =  ContactUs::latest()->simplePaginate(10);
@@ -43,8 +38,6 @@ class ContactUsController extends Controller
             'message' => 'required'
         ]);
 
-
-
         $data = array(
             'message'   =>   $request->message
         );
@@ -56,7 +49,6 @@ class ContactUsController extends Controller
 
     public function store(Request $request)
     {
-
 
         $this->validate($request, [
             'name' => 'required',

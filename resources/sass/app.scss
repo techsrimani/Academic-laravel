@@ -1,22 +1,55 @@
+
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
-
-
-
-
-
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,200,200italic,300,300italic,400italic,600,600italic,700,700italic,900,900italic);
+$background: #111E25;
+$dark: #111;
+$primary: #BB1515;
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.navbar-light .navbar-nav .nav-link{
+  color:black;
+  font-size: 22.7px;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+background: linear-gradient(to  bottom left, rgba(13, 219, 254, 1), rgba(237, 14, 248, 1));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.fade-in {
+  animation: fadeIn ease 3s;
+  -webkit-animation: fadeIn ease 3s;
+  -moz-animation: fadeIn ease 3s;
+  -o-animation: fadeIn ease 3s;
+  -ms-animation: fadeIn ease 3s;
+}
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@-moz-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@-webkit-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@-o-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
+@-ms-keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}
     .navbar {
       position: sticky;
       position: -webkit-sticky;
@@ -24,7 +57,6 @@
     z-index: 1 !important;
     background:white;
   }
-
   .navbar .navbar-expand-md {
     padding: 10px 0;
   }
@@ -41,11 +73,9 @@
       text-decoration: none;
       color: #eee;
     }
-
     .ft-anchor-element:hover {
       text-decoration: none;
       color:#0DDBFE
-
     }
     .ft-title {
       color: #fff;
@@ -68,9 +98,15 @@
       display: flex;
       flex-wrap: wrap;
     }
-    @media only screen and (min-width: 29.8125rem /* 477px */) {
+    @media only screen and (max-width: 33.8125rem /* 477px */) {
       .ft-main {
         justify-content: space-evenly;
+      }
+        .ft-main-item{
+          width: 100%;
+          width: -moz-available;          /* WebKit-based browsers will ignore this. */
+          width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
+          width: stretch;
       }
     }
     @media only screen and (min-width: 77.5rem /* 1240px */) {
@@ -83,7 +119,6 @@
       min-width: 12.5rem;
       text-align: center;
     }
-
     /* Footer social */
     .ft-social {
       padding: 0 1.875rem 1.25rem;
@@ -104,30 +139,97 @@
       background-color: #333;
     }
     .ft-legal-list {
-    background-image: linear-gradient(to  bottom left, rgba(13, 219, 254, 1), rgba(237, 14, 248, 1));
-    color:#000;
+    color:white;
       width: 100%;
       display: flex;
       flex-wrap: wrap;
     justify-content:center;
     }
-
 //contact-us css
 .text-primary{
     font-size:1rem;
 }
-
-
-.navbar-light .navbar-nav .nav-link{
-    color:black;
-  }
-  .navbar-light .navbar-nav .nav-link:hover {
-  font-size: 22.7px;
+table {
+  table-layout: fixed;
+  display: block;
+  overflow: scroll;
+  /* Scrollbar are always visible */
+  overflow: auto;
+  /* Scrollbar is displayed as it's needed */
+}
+/*Career page CSS*/
+@media only screen and (max-width: 600px ) {
+    h3 {
+       font-size:18px
+ }
+ .career-h2{
+     font-size:30px;
+     margin:2rem;
+     padding-top:2rem;
+     border-top:1px solid grey;
+ }
+}
+.career-h2,h3{
+  font-weight:600
+}
+.open-hover:hover{
   background: linear-gradient(to  bottom left, rgba(13, 219, 254, 1), rgba(237, 14, 248, 1));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  }
-
-
-
-
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.header-only-list,.header-only-list li{
+font-size: 24.7px;
+background: linear-gradient(to  bottom left, rgba(13, 219, 254, 1), rgba(237, 14, 248, 1));
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+.package-col{
+ padding:0 8vw ;margin-bottom:3rem;
+}
+.career-para{
+  text-align:center;
+}
+.career-page-ul{
+  list-style-type:circle;
+  padding:0 2.5rem;
+}
+.btn-c,.btn-c:visited {
+ background:linear-gradient(to left,#0DDBFE,#ED0EF8);
+text-transform: uppercase;
+text-decoration: none;
+padding: 0.5rem 2rem;
+display: inline-block;
+border-radius: 2.50rem;
+transition: all .2s;
+position: relative;left:25%;
+font-size: 1rem;
+color: white;
+border: none;
+cursor: pointer; }
+.btn-c:hover {
+transform: translateY(-3px);
+box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+@media only screen and (min-width: 1200px ) {
+  .package-col{
+ border-left:2px solid grey;
+}
+}
+.btn-c:hover::after {
+transform: scaleX(1.4) scaleY(1.6);
+opacity: 0;
+}
+.main-career-heading{
+text-align:center;
+}
+.career-h1{
+ font-size: 34.7px;
+font-weight:900;
+ background: linear-gradient(to  bottom left, rgba(13, 219, 254, 1), rgba(237, 14, 248, 1));
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+}
+.career-custom-bg{
+ background-image: linear-gradient(315deg, #F6F6F6 0%, #E9E9E9 74%);
+}
+/*career-page-css-End*/

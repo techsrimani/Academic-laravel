@@ -244,11 +244,21 @@
             <p class="col-md-6"><strong>Relation : </strong>{{ $application->ref_relation2 }}</p>
 
             <h3 class="card-header col-md-12  mb-5">
-                Date Linkedin and Facebook,
+                Recruitment Partner details
+            </h3>
+
+            <p class="col-md-6"><strong>Partner Name : </strong>{{ $application->partner_name }}</p>
+            <p class="col-md-6"><strong>Partner Number : </strong>{{ $application->partner_number }}</p>
+            <p class="col-md-6"><strong>Partner Company Name : </strong>{{ $application->partner_company_name }}</p>
+            <p class="col-md-6"><strong>Partner Email: </strong>{{ $application->partner_email }}</p>
+
+
+            <h3 class="card-header col-md-12  mb-5">
+                Special category details
             </h3>
 
             <p class="col-md-6"><strong>Special Category : </strong>{{ $application->spl_category }}</p>
-            <p class="col-md-6"><strong>Special Category Details : </strong>{{ $application->ref_relation2 }}</p>
+            <p class="col-md-6"><strong>Special Category Details : </strong>{{ $application->spl_category_details }}</p>
 
 
             <p class="border-bottom col-md-12"></p>

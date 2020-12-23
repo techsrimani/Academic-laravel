@@ -12,7 +12,7 @@
         }
 
     </style>
-    <div class="container">
+    <div class="container  bg-white shadow  p-3 mb-5">
         <h1 class="display-1 text-dark text-center">Apply for Job</h1>
 
         <form method="post" enctype="multipart/form-data" action="{{ route('apply-job') }}">
@@ -23,14 +23,18 @@
 
                 <div class="form-group col-md-12">
                     <label>Select Role You are applying for</label>
-                    <select class="form-control {{ $errors->has('name') ? 'error' : '' }}" name="position">
+                    <select class="form-control {{ $errors->has('position') ? 'error' : '' }}" name="position"
+                        value="{{ old('position') }}">
+                        @if ($errors->has('position'))
+                            <option selected>{{ old('position') }}</option>
+                        @else
                         <option selected disabled>choose ...</option>
                         <option>Full Stack Web Developer</option>
                         <option>Web Developer</option>
                         <option>Android App Developer</option>
                         <option>Ios App Developer</option>
                         <option>DevOPS and MS Azure Admin</option>
-
+                        @endif
                     </select>
                     <!-- Error -->
                     @if ($errors->has('position'))
@@ -41,11 +45,10 @@
                     @endif
                 </div>
 
-
                 <div class="form-group col-md-6">
                     <label>First Name</label>
                     <input type="text" class="form-control {{ $errors->has('first_name') ? 'error' : '' }}"
-                        name="first_name">
+                        name="first_name" value="{{ old('first_name') }}">
 
                     <!-- Error -->
                     @if ($errors->has('first_name'))
@@ -58,7 +61,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Last Name</label>
-                    <input type="text" class="form-control {{ $errors->has('last_name') ? 'error' : '' }}" name="last_name" value="{{ old('last_name') }}" }}>
+                    <input type="text" class="form-control {{ $errors->has('last_name') ? 'error' : '' }}" name="last_name"
+                        value="{{ old('last_name') }}" }}>
 
                     <!-- Error -->
                     @if ($errors->has('last_name'))
@@ -71,7 +75,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Passpost size Photo</label>
-                    <input type="file" class="form-control {{ $errors->has('photo') ? 'error' : '' }}" name="photo" />
+                    <input type="file" class="form-control {{ $errors->has('photo') ? 'error' : '' }}" name="photo"
+                        value="{{ old('photo') }}" />
 
                     <!-- Error -->
                     @if ($errors->has('photo'))
@@ -84,7 +89,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Date of Birth</label>
-                    <input type="date" class="form-control {{ $errors->has('dob') ? 'error' : '' }}" name="dob">
+                    <input type="date" class="form-control {{ $errors->has('dob') ? 'error' : '' }}" name="dob"
+                        value="{{ old('dob') }}">
 
                     <!-- Error -->
                     @if ($errors->has('dob'))
@@ -97,7 +103,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Age</label>
-                    <input type="text" class="form-control {{ $errors->has('age') ? 'error' : '' }}" name="age">
+                    <input type="text" class="form-control {{ $errors->has('age') ? 'error' : '' }}" name="age"
+                        value="{{ old('age') }}">
 
                     <!-- Error -->
                     @if ($errors->has('age'))
@@ -110,7 +117,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Sex</label>
-                    <select class="form-control {{ $errors->has('sex') ? 'error' : '' }}" name="sex">
+                    <select class="form-control {{ $errors->has('sex') ? 'error' : '' }}" name="sex"
+                        value="{{ old('sex') }}">
                         <option selected disabled>Choose...</option>
                         <option>Male</option>
                         <option>Female</option>
@@ -128,7 +136,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Email</label>
-                    <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email">
+                    <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email"
+                        value="{{ old('email') }}">
 
                     <!-- Error -->
                     @if ($errors->has('email'))
@@ -141,8 +150,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Alternate Email</label>
-                    <input type="email" class="form-control {{ $errors->has('alt_email') ? 'error' : '' }}"
-                        name="alt_email">
+                    <input type="email" class="form-control {{ $errors->has('alt_email') ? 'error' : '' }}" name="alt_email"
+                        value="{{ old('alt_email') }}">
 
                     <!-- Error -->
                     @if ($errors->has('alt_email'))
@@ -155,7 +164,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Mobile Number*</label>
-                    <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone">
+                    <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone"
+                        value="{{ old('phone') }}">
 
                     <!-- Error -->
                     @if ($errors->has('phone'))
@@ -168,7 +178,8 @@
 
                 <div class="form-group col-md-6">
                     <label>Alternate Mobile Number</label>
-                    <input type="text" class="form-control {{ $errors->has('alt_phone') ? 'error' : '' }}" name="alt_phone">
+                    <input type="text" class="form-control {{ $errors->has('alt_phone') ? 'error' : '' }}" name="alt_phone"
+                        value="{{ old('alt_phone') }}">
 
                     <!-- Error -->
                     @if ($errors->has('alt_phone'))
@@ -178,8 +189,6 @@
                         </div>
                     @endif
                 </div>
-
-
 
                 <h1 class="display-5 text-dark text-left col-md-12">Parent details</h1>
 
@@ -311,7 +320,7 @@
                     @endif
                 </div>
 
-                <h1 class="display-5 text-dark text-left col-md-12">Permananet Address</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Permanent Address</h1>
 
                 <div class="form-group col-md-6">
                     <label>Address Line1*</label>
@@ -406,6 +415,13 @@
                         </div>
                     @endif
                 </div>
+
+                <div class="form-check col-md-12 ml-3 mt-3">
+                    <input type="checkbox" class="form-check-input" name="sameaddress" onclick="fillAddress(this.form)">
+                    <label class="form-check-label"><strong>Check this box if both present and permanent address are
+                            same.</strong></label>
+                </div>
+
 
                 <h1 class="display-5 text-dark text-left col-md-12">Present Address</h1>
 
@@ -1032,15 +1048,31 @@
                     <tr>
 
                         <td> <select class="form-control {{ $errors->has('skill1') ? 'error' : '' }}" name="skill1">
-                                <div id="skillsDropDown">
-                                    <option selected disabled>Choose...</option>
-                                    <option>Html</option>
-                                    <option>Css</option>
-                                    <option>Javacript</option>
-                                    <option>Sql</option>
-                                    <option>Dart</option>
-                                    <option>Python</option>
-                                </div>
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
                             </select>
                             <!-- Error -->
                             @if ($errors->has('skill1'))
@@ -1084,15 +1116,31 @@
                     <tr>
 
                         <td> <select class="form-control {{ $errors->has('skill2') ? 'error' : '' }}" name="skill2">
-                                <div id="skillsDropDown">
-                                    <option selected>Choose...</option>
-                                    <option>Html</option>
-                                    <option>Css</option>
-                                    <option>Javacript</option>
-                                    <option>Sql</option>
-                                    <option>Dart</option>
-                                    <option>Python</option>
-                                </div>
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
                             </select>
 
                             @if ($errors->has('skill2'))
@@ -1134,15 +1182,31 @@
                     <tr>
 
                         <td> <select class="form-control {{ $errors->has('skill3') ? 'error' : '' }}" name="skill3">
-                                <div id="skillsDropDown">
-                                    <option selected>Choose...</option>
-                                    <option>Html</option>
-                                    <option>Css</option>
-                                    <option>Javacript</option>
-                                    <option>Sql</option>
-                                    <option>Dart</option>
-                                    <option>Python</option>
-                                </div>
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
                             </select>
                             @if ($errors->has('skill3'))
                                 <div class="error alert-danger">
@@ -1180,15 +1244,31 @@
                     <tr>
 
                         <td> <select class="form-control {{ $errors->has('skill4') ? 'error' : '' }}" name="skill4">
-                                <div id="skillsDropDown">
-                                    <option selected>Choose...</option>
-                                    <option>Html</option>
-                                    <option>Css</option>
-                                    <option>Javacript</option>
-                                    <option>Sql</option>
-                                    <option>Dart</option>
-                                    <option>Python</option>
-                                </div>
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
                             </select>
                             @if ($errors->has('skill4'))
                                 <div class="error alert-danger">
@@ -1226,15 +1306,31 @@
                     <tr>
 
                         <td> <select class="form-control {{ $errors->has('skill5') ? 'error' : '' }}" name="skill5">
-                                <div id="skillsDropDown">
-                                    <option disabled selected hidden>Choose...</option>
-                                    <option>Html</option>
-                                    <option>Css</option>
-                                    <option>Javacript</option>
-                                    <option>Sql</option>
-                                    <option>Dart</option>
-                                    <option>Python</option>
-                                </div>
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
                             </select>
                             @if ($errors->has('skill5'))
                                 <div class="error alert-danger">
@@ -1270,10 +1366,319 @@
                     </tr>
 
 
+                    <tr>
+
+                        <td> <select class="form-control {{ $errors->has('skill6') ? 'error' : '' }}" name="skill6">
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
+                            </select>
+                            @if ($errors->has('skill6'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('skill6') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="eval6" class="form-control" />
+                            @if ($errors->has('eval6'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('eval6') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="sremarks6" class="form-control" />
+                            @if ($errors->has('sremarks6'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('sremarks6') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="exp6" class="form-control" />
+                            @if ($errors->has('exp6'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('exp6') }}
+                                </div>
+                            @endif
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td> <select class="form-control {{ $errors->has('skill7') ? 'error' : '' }}" name="skill7">
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
+                            </select>
+                            @if ($errors->has('skill7'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('skill7') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="eval7" class="form-control" />
+                            @if ($errors->has('eval7'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('eval7') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="sremarks7" class="form-control" />
+                            @if ($errors->has('sremarks7'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('sremarks7') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="exp7" class="form-control" />
+                            @if ($errors->has('exp7'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('exp7') }}
+                                </div>
+                            @endif
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td> <select class="form-control {{ $errors->has('skill8') ? 'error' : '' }}" name="skill8">
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
+                            </select>
+                            @if ($errors->has('skill8'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('skill8') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="eval8" class="form-control" />
+                            @if ($errors->has('eval8'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('eval8') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="sremarks8" class="form-control" />
+                            @if ($errors->has('sremarks8'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('sremarks8') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="exp8" class="form-control" />
+                            @if ($errors->has('exp8'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('exp8') }}
+                                </div>
+                            @endif
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td> <select class="form-control {{ $errors->has('skill9') ? 'error' : '' }}" name="skill9">
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
+                            </select>
+                            @if ($errors->has('skill9'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('skill9') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="eval9" class="form-control" />
+                            @if ($errors->has('eval9'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('eval9') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="sremarks9" class="form-control" />
+                            @if ($errors->has('sremarks9'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('sremarks9') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="exp9" class="form-control" />
+                            @if ($errors->has('exp9'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('exp9') }}
+                                </div>
+                            @endif
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td> <select class="form-control {{ $errors->has('skill10') ? 'error' : '' }}" name="skill10">
+                                <option selected disabled>Choose...</option>
+                                <option>HTML</option>
+                                <option>CSS</option>
+                                <option>JAVASCRIPT</option>
+                                <option>PHP/MySQL</option>
+                                <option>Frontend Web Design</option>
+                                <option>Web DevOPS</option>
+                                <option>Dart</option>
+                                <option>Flutter</option>
+                                <option>Frontend Android Design</option>
+                                <option>Backend Android App integration</option>
+                                <option>Swift UI</option>
+                                <option>Xcode</option>
+                                <option>Frontend Ios App Design</option>
+                                <option>Ms Azure Resorce Management</option>
+                                <option>Ms Azure Hosting</option>
+                                <option>Ms Azure DevOPS</option>
+                                <option>Full Stack Web Developer</option>
+                                <option>Full Stack Ios Developer</option>
+                                <option>Full Stack Android Developer</option>
+                                <option>Full Stack DevOPS Ms Azure Administrator</option>
+                                <option>Web RTC</option>
+                                <option>Angular</option>
+                                <option>Laravel</option>
+
+
+                            </select>
+                            @if ($errors->has('skill10'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('skill10') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="eval10" class="form-control" />
+                            @if ($errors->has('eval10'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('eval10') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="sremarks10" class="form-control" />
+                            @if ($errors->has('sremarks10'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('sremarks10') }}
+                                </div>
+                            @endif
+                        </td>
+
+                        <td><input type="text" name="exp10" class="form-control" />
+                            @if ($errors->has('exp10'))
+                                <div class="error alert-danger">
+                                    {{ $errors->first('exp10') }}
+                                </div>
+                            @endif
+                        </td>
+
+                    </tr>
 
                 </table>
-
-
 
                 <h1 class="display-5 text-dark text-left col-md-12">Additional skills</h1>
 
@@ -1493,20 +1898,23 @@
                 <label class="col-md-12">Special Category Information (if any, optional to share)</label>
 
 
-                <div class="radio col-md-4">
+                <div class="radio col-md-3">
                     <label><input type="radio" name="spl_category" value="Differently Abled">Differently Abled</label>
                 </div>
-                <div class="radio col-md-4">
+                <div class="radio col-md-3">
                     <label><input type="radio" name="spl_category" value="From Martyr Family">From Martyr Family</label>
                 </div>
-                <div class="radio col-md-4">
+                <div class="radio col-md-3">
                     <label><input type="radio" name="spl_category" value="Single/No Parent">Single/No Parent</label>
+                </div>
+                <div class="radio col-md-3">
+                    <label><input type="radio" name="spl_category" value="None">None</label>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>Special Category details</label>
                     <input type="text" class="form-control {{ $errors->has('spl_category_details') ? 'error' : '' }}"
-                        name="sp_details">
+                        name="spl_category_details">
                     @if ($errors->has('spl_category_details'))
                         <div class="error alert-danger">
                             {{ $errors->first('spl_category_details') }}
@@ -1701,7 +2109,69 @@
 
                 </table>
 
-                <div class="form-group col-md-4">
+                <h1 class="display-5 text-dark text-left col-md-12">Final Details</h1>
+
+                <div class="form-check col-md-12 ml-3 mt-3">
+                    <input type="checkbox" class="form-check-input" name="recruit-partner" id="recruit-partner" value="yes">
+                    <label class="form-check-label"><strong>Check this only if you have applied through recruitment partners
+                            company</strong></label>
+                </div>
+
+
+
+                <div class="row" id="recruit-details">
+
+                    <div class="form-group col-md-3">
+                        <label>Partner Name</label>
+                        <input type="text" class="form-control {{ $errors->has('partner_name') ? 'error' : '' }}"
+                            name="partner_name">
+
+                        @if ($errors->has('partner_name'))
+                            <div class="error alert-danger">
+                                {{ $errors->first('partner_name') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Mobile Number</label>
+                        <input type="text" class="form-control {{ $errors->has('partner_number') ? 'error' : '' }}"
+                            name="partner_number">
+
+                        @if ($errors->has('partner_number'))
+                            <div class="error alert-danger">
+                                {{ $errors->first('partner_number') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Partner Company Name</label>
+                        <input type="text" class="form-control {{ $errors->has('partner_company_name') ? 'error' : '' }}"
+                            name="partner_company_name">
+
+                        @if ($errors->has('partner_company_name'))
+                            <div class="error alert-danger">
+                                {{ $errors->first('partner_company_name') }}
+                            </div>
+                        @endif
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label>Partner Email-id</label>
+                        <input type="text" class="form-control {{ $errors->has('partner_email') ? 'error' : '' }}"
+                            name="partner_email">
+
+                        @if ($errors->has('partner_email'))
+                            <div class="error alert-danger">
+                                {{ $errors->first('partner_email') }}
+                            </div>
+                        @endif
+                    </div>
+
+                </div>
+
+                <div class="form-group col-md-4 mt-3">
                     <label>Available start date</label>
                     <input type="date" class="form-control {{ $errors->has('avl_date') ? 'error' : '' }}" name="avl_date">
 
@@ -1712,7 +2182,7 @@
                     @endif
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4 mt-3">
                     <label>Linkedin Profile Link</label>
                     <input type="text" class="form-control {{ $errors->has('linkedin') ? 'error' : '' }}" name="linkedin">
 
@@ -1723,7 +2193,7 @@
                     @endif
                 </div>
 
-                <div class="form-group col-md-4">
+                <div class="form-group col-md-4 mt-3">
                     <label>Facebook Profile</label>
                     <input type="text" class="form-control {{ $errors->has('facebook') ? 'error' : '' }}" name="facebook">
 
@@ -1741,19 +2211,41 @@
                     </div>
                 @endif
             </div>
+    </div>
 
     </div>
 
     </form>
 
+    <script type="text/javascript">
+        function fillAddress(f) {
+            if (f.sameaddress.checked == true) {
+                f.present_address_l1.value = f.address_l1.value;
+                f.present_address_l2.value = f.address_l2.value;
+                f.present_city.value = f.city.value;
+                f.present_state.value = f.state.value;
+                f.present_pincode.value = f.pincode.value;
+                f.present_country.value = f.country.value;
+            }
+        }
+
+    </script>
 
 
+    {{-- script for partner --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#recruit-details").hide();
+            $("#recruit-partner").change(function() {
+                $("#recruit-details").toggle();
+            });
+        });
 
+    </script>
 
-
+    {{-- script for add more fields --}}
     <script type="text/javascript">
         var i = 0;
-
         $("#add").click(function() {
 
             ++i;

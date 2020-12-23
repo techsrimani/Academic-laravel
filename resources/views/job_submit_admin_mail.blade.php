@@ -1,4 +1,61 @@
+<style>
+.display-3 {
+  font-size: 4.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+}
 
+.text-center {
+  text-align: center !important;
+}
+.container
+{
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.row
+{
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.shadow {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.p-3 {
+  padding: 1rem !important;
+}
+
+.mb-5,
+.my-5 {
+  margin-bottom: 3rem !important;
+}
+.bg-white {
+  background-color: #fff !important;
+}
+.rounded {
+  border-radius: 0.25rem !important;
+}
+.col-md-3{
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.col-md-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+
+</style>
     <h1 class="display-3 text-center">{{ $application->first_name . ' ' . $application->last_name }}'s application</h1>
 
     <div class="container">
