@@ -2,6 +2,18 @@
 @section('content')
 
     <style>
+        label {
+            color: black;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control:focus {
+            border-color: #ED0EF8;
+            color: black;
+            box-shadow: 0 .05rem .3rem #ED0EF8 !important;
+        }
+
         table {
             table-layout: fixed;
             display: block;
@@ -9,6 +21,35 @@
             /* Scrollbar are always visible */
             overflow: auto;
             /* Scrollbar is displayed as it's needed */
+        }
+
+        #spinner {
+
+            visibility: hidden;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #f3f3f3;
+            border-top: 3px solid #ED0EF8;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #spinner.show {
+            visibility: visible;
         }
 
     </style>
@@ -22,7 +63,7 @@
             <div class="form-row">
 
                 <div class="form-group col-md-12">
-                    <label>Select Role You are applying for</label>
+                    <label>Select Role You are applying for*</label>
                     <select class="form-control {{ $errors->has('position') ? 'error' : '' }}" name="position">
 
                         <option selected disabled>choose ...</option>
@@ -36,37 +77,37 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>First Name</label>
+                    <label>First Name*</label>
                     <input type="text" class="form-control" name="first_name">
                     <div class="text-danger error" data-error="first_name"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Last Name</label>
+                    <label>Last Name*</label>
                     <input type="text" class="form-control" name="last_name">
                     <div class="text-danger error" data-error="last_name"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Passpost size Photo</label>
+                    <label>Passpost size Photo*</label>
                     <input type="file" class="form-control" name="photo" />
                     <div class="text-danger error" data-error="photo"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Date of Birth</label>
+                    <label>Date of Birth*</label>
                     <input type="date" class="form-control" name="dob">
                     <div class="text-danger error" data-error="dob"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Age</label>
+                    <label>Age*</label>
                     <input type="text" class="form-control" name="age">
                     <div class="text-danger error" data-error="age"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Sex</label>
+                    <label>Sex*</label>
                     <select class="form-control" name="sex">
                         <option selected disabled>Choose...</option>
                         <option>Male</option>
@@ -77,7 +118,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Email</label>
+                    <label>Email*</label>
                     <input type="email" class="form-control" name="email">
                     <div class="text-danger error" data-error="email"></div>
                 </div>
@@ -101,7 +142,7 @@
                     <div class="text-danger error" data-error="alt_phone"></div>
                 </div>
 
-                <h1 class="display-5 text-dark text-left col-md-12">Parent details</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Parent details (Any one person is a must)*</h1>
 
                 <div class="form-group col-md-4">
                     <label>Father Name</label>
@@ -169,14 +210,14 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Address Line2</label>
+                    <label>Address Line2*</label>
                     <input type="text" class="form-control" name="address_l2">
                     <div class="text-danger error" data-error="address_l2"></div>
 
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>City</label>
+                    <label>City*</label>
                     <input type="text" class="form-control" name="city">
                     <div class="text-danger error" data-error="city"></div>
 
@@ -184,7 +225,7 @@
 
                 <div class="form-group col-md-6">
                     <label>
-                        State / Province
+                        State / Province*
                     </label>
                     <input type="text" class="form-control" name="state">
                     <div class="text-danger error" data-error="state"></div>
@@ -193,7 +234,7 @@
 
                 <div class="form-group col-md-6">
                     <label>
-                        Postal / Zip Code
+                        Postal / Zip Code*
                     </label>
                     <input type="text" class="form-control" name="pincode">
                     <div class="text-danger error" data-error="pincode"></div>
@@ -201,7 +242,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Country</label>
+                    <label>Country*</label>
                     <select class="form-control" name="country">
                         <option selected disabled>Choose...</option>
                         <option>India</option>
@@ -221,7 +262,7 @@
                 </div>
 
 
-                <h1 class="display-5 text-dark text-left col-md-12">Present Address</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Present Address*</h1>
 
                 <div class="form-group col-md-6">
                     <label>Address Line1*</label>
@@ -231,13 +272,13 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Address Line2</label>
+                    <label>Address Line2*</label>
                     <input type="text" class="form-control" name="present_address_l2">
                     <div class="text-danger error" data-error="present_address_l2"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>City</label>
+                    <label>City*</label>
                     <input type="text" class="form-control" name="present_city">
                     <div class="text-danger error" data-error="present_city"></div>
 
@@ -245,7 +286,7 @@
 
                 <div class="form-group col-md-6">
                     <label>
-                        State / Province
+                        State / Province*
                     </label>
                     <input type="text" class="form-control" name="present_state">
                     <div class="text-danger error" data-error="present_state"></div>
@@ -254,7 +295,7 @@
 
                 <div class="form-group col-md-6">
                     <label>
-                        Postal / Zip Code
+                        Postal / Zip Code*
                     </label>
                     <input type="text" class="form-control" name="present_pincode">
                     <div class="text-danger error" data-error="present_pincode"></div>
@@ -262,7 +303,7 @@
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Country</label>
+                    <label>Country*</label>
                     <select class="form-control" name="present_country">
                         <option selected disabled>Choose...</option>
                         <option>India</option>
@@ -275,7 +316,7 @@
                     <div class="text-danger error" data-error="present_country"></div>
                 </div>
 
-                <h1 class="display-5 text-dark text-left col-md-12">Education Details</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Education Details*</h1>
                 <table class="table table-bordered" id="dynamicTable">
 
                     <tr>
@@ -323,7 +364,7 @@
 
 
 
-                <label class="col-md-12">Select Employee Status</label>
+                <label class="col-md-12">Select Employee Status*</label>
 
 
                 <div class="radio col-md-4">
@@ -348,23 +389,24 @@
                 <div class="text-danger error col-md-12" data-error="employee_status"></div>
 
                 <div class="form-group col-md-4">
-                    <label>Current CTC in number</label>
+                    <label>Current CTC in number*</label>
                     <input type="text" class="form-control" name="current_ctc">
                     <div class="text-danger error" data-error="current_ctc"></div>
 
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label>Expected CTC in number</label>
+                    <label>Expected CTC in number*</label>
                     <input type="text" class="form-control" name="expected_ctc">
                     <div class="text-danger error" data-error="expected_ctc"></div>
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label>Number of years experience in coding</label>
+                    <label>Number of years experience in coding*</label>
                     <input type="text" class="form-control" name="experience">
                     <div class="text-danger error" data-error="experience"></div>
                 </div>
+                <label class="col-md-12">Experience (atleast one)*</label>
 
                 <table class="table table-bordered">
 
@@ -532,7 +574,7 @@
 
                 </table>
 
-                <h1 class="display-5 text-dark text-left col-md-12">Top three projects of you</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Top three projects of you(atlest one)*</h1>
 
                 <table class="table table-bordered">
 
@@ -627,7 +669,7 @@
 
 
 
-                <h1 class="display-5 text-dark text-left col-md-12">Self Evaluation of your skills</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Self Evaluation of your skills(atlest one)*</h1>
 
                 <table class="table table-bordered">
 
@@ -671,6 +713,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
                             <div class="text-danger error" data-error="skill1"></div>
@@ -693,7 +737,6 @@
                         </td>
 
                     </tr>
-
 
                     <tr>
 
@@ -722,6 +765,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
                             <div class="text-danger error" data-error="skill2"></div>
@@ -772,7 +817,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
-
+                                <option>Redis</option>
+                                <option>Python</option>
                             </select>
                             <div class="text-danger error" data-error="skill3"></div>
 
@@ -822,6 +868,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
                             <div class="text-danger error" data-error="skill4"></div>
@@ -872,6 +920,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
                             <div class="text-danger error" data-error="skill5"></div>
@@ -923,6 +973,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
 
@@ -946,7 +998,6 @@
                         </td>
 
                     </tr>
-
 
                     <tr>
 
@@ -975,6 +1026,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
                             <div class="text-danger error" data-error="skill7"></div>
@@ -1025,6 +1078,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
                             <div class="text-danger error" data-error="skill8"></div>
@@ -1075,6 +1130,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
                             <div class="text-danger error" data-error="skill9"></div>
@@ -1125,6 +1182,8 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
 
                             </select>
@@ -1319,7 +1378,7 @@
                 </div>
 
 
-                <h1 class="display-5 text-dark text-left col-md-12">Contact details for reference</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Contact details for reference*</h1>
 
                 <table class="table table-bordered">
 
@@ -1363,9 +1422,7 @@
                                 </div>
                             </select>
                             <div class="text-danger error" data-error="ref_relation"></div>
-
                         </td>
-
                     </tr>
 
 
@@ -1461,53 +1518,46 @@
                         <label>Mobile Number</label>
                         <input type="text" class="form-control " name="partner_number">
                         <div class="text-danger error" data-error="partner_number"></div>
-
                     </div>
 
                     <div class="form-group col-md-3">
                         <label>Partner Company Name</label>
                         <input type="text" class="form-control" name="partner_company_name">
                         <div class="text-danger error" data-error="partner_company_name"></div>
-
                     </div>
 
                     <div class="form-group col-md-3">
                         <label>Partner Email-id</label>
                         <input type="text" class="form-control" name="partner_email">
                         <div class="text-danger error" data-error="partner_email"></div>
-
                     </div>
 
                 </div>
 
                 <div class="form-group col-md-4 mt-3">
-                    <label>Available start date</label>
+                    <label>Available start date*</label>
                     <input type="date" class="form-control" name="avl_date">
                     <div class="text-danger error" data-error="avl_date"></div>
                 </div>
 
                 <div class="form-group col-md-4 mt-3">
-                    <label>Linkedin Profile Link</label>
+                    <label>Linkedin Profile Link*</label>
                     <input type="text" class="form-control" name="linkedin">
                     <div class="text-danger error" data-error="linkedin"></div>
                 </div>
 
                 <div class="form-group col-md-4 mt-3">
-                    <label>Facebook Profile</label>
+                    <label>Facebook Profile*</label>
                     <input type="text" class="form-control " name="facebook">
                     <div class="text-danger error" data-error="facebook"></div>
-
-
                 </div>
-
-                <input type="submit" value="Submit" class="btn btn-dark btn-block">
-                @if (session()->has('success'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
+                <input type="submit" value="Submit" class="btn ac-button btn-block">
+                <p style="visibility:hidden;" class="text-center text-danger col-md-12" id="error-desc">Please check some filed is invalid above modify and submit again</p>
             </div>
+
     </div>
+    <div id="spinner"></div>
+
 
     </div>
 
@@ -1566,11 +1616,12 @@
 
     </script>
 
-
     <script>
         $(document).ready(function() {
 
             $('#job_form').on('submit', function(event) {
+                const spinner = document.getElementById("spinner");
+                spinner.className = "show";
                 event.preventDefault();
                 $('.error').html('');
                 $.ajax({
@@ -1582,16 +1633,28 @@
                     cache: false,
                     processData: false,
                     success: function(data) {
+
+                        spinner.className = spinner.className.replace("show", "");
+
+
                         console.log("done");
+                        window.location.href = "{{ route('thankyou') }}";
+
                     },
                     error: function(error) {
+
+                        spinner.className = spinner.className.replace("show", "");
+
+
                         let errors = error.responseJSON.errors
                         for (let key in errors) {
                             let errorDiv = $(`.error[data-error="${key}"]`);
                             if (errorDiv.length) {
+
                                 errorDiv.text(errors[key][0]);
                             }
                         }
+                        document.getElementById("error-desc").style.visibility = "visible";
                     }
                 })
             });
@@ -1599,6 +1662,8 @@
         });
 
     </script>
+
+
 
 
 

@@ -249,7 +249,6 @@ class JobsSubmissionController extends Controller
         $job->delete();
         return redirect()->route('job-applications')
             ->with('success', 'Product deleted successfully');
-
     }
 
     public function createApplicantPDF($id)
@@ -333,7 +332,6 @@ class JobsSubmissionController extends Controller
             'present_state' => $request->present_state,
             'present_pincode' => $request->present_pincode,
             'present_country' => $request->present_country,
-
 
             'employee_status' => $request->employee_status,
             'current_ctc' => $request->current_ctc,
@@ -445,7 +443,6 @@ class JobsSubmissionController extends Controller
             'add_sremarks5' => $request->add_sremarks5,
             'add_exp5' => $request->add_exp5,
 
-
             'ref_name' => $request->ref_name,
             'ref_number' => $request->ref_number,
             'ref_occupation' => $request->ref_occupation,
@@ -469,7 +466,6 @@ class JobsSubmissionController extends Controller
             'facebook' => $request->facebook,
         );
 
-
         $job = JobApplications::create($form_data);
         $addressInstances = [];
 
@@ -480,12 +476,8 @@ class JobsSubmissionController extends Controller
 
         $job->educationDetails()->saveMany($addressInstances);
 
-
-        // Mail::send(new JobSubmitUserMail($job));
-        // Mail::send(new JobSubmitAdminMAil($job));
-
-
-
+        Mail::send(new JobSubmitUserMail($job));
+        Mail::send(new JobSubmitAdminMAil($job));
         return response()->json(['success' => true]);
 
     }

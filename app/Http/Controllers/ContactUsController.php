@@ -49,25 +49,27 @@ class ContactUsController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request);
 
         $this->validate($request, [
-            'name' => 'required',
+            'fname' => 'required',
+            'lname' => 'required',
             'email' => 'required|email',
-            'phone' => 'required | numeric | digits:10 | starts_with: 6,7,8,9',
-            'message' => 'required'
+            'phone' => 'required'
         ]);
 
         ContactUs::create($request->all());
 
         $data = array(
-            'name'      =>  $request->name,
+            'fname'      =>  $request->fname,
+            'lname'      =>  $request->lname,
             'email'    => $request->email,
             'phone'    => $request->phone,
             'message'   =>   $request->message
         );
 
-        Mail::send(new ContactUsMail($data));
-        Mail::send(new ContactusUserAcknowledgement($data));
+        // Mail::send(new ContactUsMail($data));
+        // Mail::send(new ContactusUserAcknowledgement($data));
 
         return redirect()->back()->with('success', 'Thanks a lot your message means a lot to us!');
     }

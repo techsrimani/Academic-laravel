@@ -55,11 +55,11 @@ class JobApplicationRequest extends FormRequest
 
             //dynamic field validation
 
-            'addmore.*.degree' => 'required|max : 30',
-            'addmore.*.institute' => 'required| max:50',
-            'addmore.*.year' => 'required|numeric|max:2021',
-            'addmore.*.aggregate' => 'required|numeric|max:100',
-            'addmore.*.remarks' => 'required|max:190',
+            // 'addmore.*.degree' => 'required|max : 30',
+            // 'addmore.*.institute' => 'required| max:50',
+            // 'addmore.*.year' => 'required|numeric|max:2021',
+            // 'addmore.*.aggregate' => 'required|numeric|max:100',
+            // 'addmore.*.remarks' => 'required|max:190',
 
 
             'employee_status' => 'required',

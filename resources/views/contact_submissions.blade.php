@@ -11,7 +11,7 @@
 
             <div class="card p-3 mt-4">
 
-                <h3 class="card-header"><strong>Name :</strong> {{ $contact->name }}</h3>
+            <h3 class="card-header"><strong>Name :</strong> {{ $contact->fname }} {{$contact->lname}}</h3>
                 <div class="card-body">
                     @if (session()->has('success'))
                     <div class="alert alert-success">

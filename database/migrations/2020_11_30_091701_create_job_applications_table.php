@@ -170,14 +170,6 @@ class CreateJobApplicationsTable extends Migration
             $table->string('linkedin');
             $table->string('facebook');
 
-
-
-
-
-
-
-
-
             $table->timestamps();
         });
     }

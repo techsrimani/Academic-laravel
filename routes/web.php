@@ -19,7 +19,11 @@ Route::get('/', function () {
 
 Route::get('/careers', function () {
     return view('careers');
-});
+})->name('careers');
+
+Route::get('/thankyou', function () {
+    return view('thankyou');
+})->name('thankyou');
 
 Auth::routes();
 
@@ -30,7 +34,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/contact-us', [App\Http\Controllers\ContactUsController::class, 'create'])->name('contact-us');
 Route::get('/contact-requests', [App\Http\Controllers\ContactUsController::class, 'index'])->name('contact-requests')->middleware('auth');
 Route::delete('/contact-requests/{id}', [App\Http\Controllers\ContactUsController::class, 'destroy'])->name('contact.delete')->middleware('auth');
-Route::post('/contact-us', [App\Http\Controllers\ContactUsController::class, 'store']);
+Route::post('/contact-us', [App\Http\Controllers\ContactUsController::class, 'store'])->name('contact.post');
 Route::get('/contact-reply/{id}', [App\Http\Controllers\ContactUsController::class, 'replyView'])->name('contact.reply');
 
 //jobs

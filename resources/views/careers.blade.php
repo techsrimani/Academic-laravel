@@ -1,12 +1,17 @@
 @extends('layouts.app')
 @section('content')
+    <style>
+
+
+    </style>
     <main class="container">
         <section class="main-career-heading">
             <div class="career-heading-1">
                 <div class="col-md-12">
                     <h1>Together at Academic Connect</h1>
                     <p><strong>We are looking for value-adding developers, DevOps, and Microsoft Azure administrators to
-                            expand our SaaS division.</strong< /p>
+                            expand our SaaS division.</strong>
+                        < /p>
                             <p>Work or Coding Experience: At least 1 Year.</br>
                                 <span><strong>Education :</strong></span> No Specific Requirement.<br>
                                 <span><strong>Location :</strong></span>JP Nagar, Bengaluru, India.</br>
@@ -28,30 +33,31 @@
                 </div>
             </div>
         </section>
-        <section>
-            <div class="row shadow p-3 mb-5 bg-white rounded for-mobile-view">
-                <h1 class="col-md-12 text-center career-h1">Open Positions</h1>
-                <div class="col-md-4 text-center p-2 md-2">
-                    <h3 class="open-hover" id="click">Full Stack Developer<h3>
-                </div>
-                <div class="col-md-4 text-center p-2 md-2">
-                    <h3 class="open-hover" id="click-2">Web Developer<h3>
-                </div>
-                <div class="col-md-4 text-center p-2 md-2">
-                    <h3 class="open-hover" id="click-3">Android Developer<h3>
-                </div>
-                <div class="col-md-4 text-center p-2 md-2">
-                    <h3 class="open-hover" id="click-4">Ios Developer<h3>
-                </div>
-                <div class="col-md-4 text-center p-2 md-2">
-                    <h3 class="open-hover" id="click-5">DevOps&MS Azure <h3>
-                </div>
+
+        <div class="row shadow p-3 mb-5 bg-white rounded for-mobile-view">
+            <h1 class="col-md-12 text-center career-h1">Open Positions</h1>
+            <div class="col-md-4 text-center p-2 md-2">
+                <h3 class="open-hover" id="click">Full Stack Developer<h3>
             </div>
-        </section>
+            <div class="col-md-4 text-center p-2 md-2">
+                <h3 class="open-hover" id="click-2">Web Developer<h3>
+            </div>
+            <div class="col-md-4 text-center p-2 md-2">
+                <h3 class="open-hover" id="click-3">Android Developer<h3>
+            </div>
+            <div class="col-md-4 text-center p-2 md-2">
+                <h3 class="open-hover" id="click-4">Ios Developer<h3>
+            </div>
+            <div id="Fs" class="col-md-4 text-center p-2 md-2">
+                <h3 class="open-hover" id="click-5">DevOps&MS Azure <h3>
+            </div>
+        </div>
+
+
         <div class="container ">
             <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg">
                 <h1 class="col-md-12 text-center career-h1">Full Stack Developer</h1>
-                <div class="col-md-6" id="Fs">
+                <div class="col-md-6">
                     <h3>Mandatory skills or Optional Skills</h3>
                     <ul class="career-page-ul">
                         <li class="list-item">HTML</li>
@@ -74,10 +80,10 @@
                     <p class=" career-para text-center">+</p>
                     <p class="career-para"><br>Attractive Equity Options. Equity will keep increasing based on contribution
                         to customer's success and long term commitment.</p>
-                    <a href="#" class="btn-c">Apply Here</a>
+                    <a id="Ws" href="{{ url('/apply-job') }}" class="btn-c">Apply Here</a>
                 </div>
             </div>
-            <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg" id="Ws">
+            <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg">
                 <h1 class="col-md-12 text-center career-h1">Web Developer</h1>
                 <div class="col-md-6">
                     <h3>Mandatory skills or Optionl Skills</h3>
@@ -101,10 +107,10 @@
                     <p class=" career-para text-center">+</p>
                     <p class="career-para"><br>Attractive Equity Options. Equity will keep increasing based on contribution
                         to customer's success and long term commitment.</p>
-                    <a href="#" class="btn-c">Apply Here</a>
+                    <a id="As" href="{{ url('/apply-job') }}" class="btn-c">Apply Here</a>
                 </div>
             </div>
-            <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg" id="As">
+            <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg">
                 <h1 class="col-md-12 text-center career-h1">Android Developer</h1>
                 <div class="col-md-6">
                     <h3>Mandatory skills or Optional Skills</h3>
@@ -127,10 +133,10 @@
                     <p class=" career-para text-center">+</p>
                     <p class="career-para"><br>Attractive Equity Options. Equity will keep increasing based on contribution
                         to customer's success and long term commitment.</p>
-                    <a href="#" class="btn-c ">Apply Here</a>
+                    <a id="Is" href="{{ url('/apply-job') }}" class="btn-c ">Apply Here</a>
                 </div>
             </div>
-            <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg" id="Is">
+            <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg">
                 <h1 class="col-md-12 text-center career-h1">Ios Developer</h1>
                 <div class="col-md-6">
                     <h3>Mandatory skills or Optional Skills</h3>
@@ -153,10 +159,10 @@
                     <p class=" career-para text-center">+</p>
                     <p class="career-para"><br>Attractive Equity Options. Equity will keep increasing based on contribution
                         to customer's success and long term commitment.</p>
-                    <a href="#" class="btn-c">Apply Here</a>
+                    <a id="Ms" href="{{ url('/apply-job') }}" class="btn-c">Apply Here</a>
                 </div>
             </div>
-            <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg" id="Ms">
+            <div class="row shadow p-3 mb-5 bg-white rounded career-custom-bg">
                 <h1 class="col-md-12 text-center career-h1">DevOps + MS Azure Administrator</h1>
                 <div class="col-md-6">
                     <h3>Mandatory skills or optional skills</h3>
@@ -176,7 +182,7 @@
                     <p class="career-para text-center">+</p>
                     <p class="career-para"><br>Attractive Equity Options. Equity will keep increasing based on contribution
                         to customer's success and long term commitment.</p>
-                    <a href="#" class="btn-c">Apply Here</a>
+                    <a href="{{ url('/apply-job') }}" class="btn-c">Apply Here</a>
                 </div>
             </div>
         </div>
