@@ -41,10 +41,6 @@ Route::get('/contact-reply/{id}', [App\Http\Controllers\ContactUsController::cla
 Route::get('/apply-job', [App\Http\Controllers\JobsSubmissionController::class, 'create'])->name('apply-job');
 Route::post('/apply-job', [App\Http\Controllers\JobsSubmissionController::class, 'store']);
 
-
-Route::get('/test', [App\Http\Controllers\JobsSubmissionController::class, 'test'])->name('test');
-Route::post('/test-form', [App\Http\Controllers\JobsSubmissionController::class, 'testForm'])->name('test-form');;
-
 Route::get('/job-applications', [App\Http\Controllers\JobsSubmissionController::class, 'index'])->name('job-applications')->middleware('auth');
 Route::get('/applicant-details/{id}', [App\Http\Controllers\JobsSubmissionController::class, 'applicantDetails'])->name('applicant-details')->middleware('auth');
 Route::delete('/job-applications/{id}', [App\Http\Controllers\JobsSubmissionController::class, 'destroy'])->name('job-applications.delete')->middleware('auth');

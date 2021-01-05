@@ -177,7 +177,6 @@ class JobApplicationRequest extends FormRequest
             'partner_number' => 'nullable| numeric | digits:10 | starts_with: 6,7,8,9',
             'partner_company_name' => 'max:190',
             'partner_email' => 'nullable|email',
-
             'spl_category_details' => 'max:190',
             'avl_date' => 'required',
             'linkedin' => 'required|max:190',

@@ -2,6 +2,18 @@
 @section('content')
 
     <style>
+        label {
+            color: black;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-control:focus {
+            border-color: #ED0EF8;
+            color: black;
+            box-shadow: 0 .05rem .3rem #ED0EF8 !important;
+        }
+
         table {
             table-layout: fixed;
             display: block;
@@ -11,394 +23,227 @@
             /* Scrollbar is displayed as it's needed */
         }
 
+        #spinner {
+
+            visibility: hidden;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #f3f3f3;
+            border-top: 3px solid #ED0EF8;
+            border-radius: 100%;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+
+            animation: spin 1s infinite linear;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #spinner.show {
+            visibility: visible;
+        }
+
     </style>
     <div class="container  bg-white shadow  p-3 mb-5">
         <h1 class="display-1 text-dark text-center">Apply for Job</h1>
 
-        <form method="post" enctype="multipart/form-data" action="{{ route('apply-job') }}">
+        <form id="job_form" method="post" enctype="multipart/form-data" action="{{ route('apply-job') }}">
 
             @csrf
 
             <div class="form-row">
 
                 <div class="form-group col-md-12">
-                    <label>Select Role You are applying for</label>
-                    <select class="form-control {{ $errors->has('position') ? 'error' : '' }}" name="position"
-                        value="{{ old('position') }}">
-                        @if ($errors->has('position'))
-                            <option selected>{{ old('position') }}</option>
-                        @else
+                    <label>Select Role You are applying for*</label>
+                    <select class="form-control {{ $errors->has('position') ? 'error' : '' }}" name="position">
+
                         <option selected disabled>choose ...</option>
                         <option>Full Stack Web Developer</option>
                         <option>Web Developer</option>
                         <option>Android App Developer</option>
                         <option>Ios App Developer</option>
                         <option>DevOPS and MS Azure Admin</option>
-                        @endif
                     </select>
-                    <!-- Error -->
-                    @if ($errors->has('position'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('position') }}
-
-                        </div>
-                    @endif
+                    <div class="text-danger error" data-error="position"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>First Name</label>
-                    <input type="text" class="form-control {{ $errors->has('first_name') ? 'error' : '' }}"
-                        name="first_name" value="{{ old('first_name') }}">
-
-                    <!-- Error -->
-                    @if ($errors->has('first_name'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('first_name') }}
-
-                        </div>
-                    @endif
+                    <label>First Name*</label>
+                    <input type="text" class="form-control" name="first_name">
+                    <div class="text-danger error" data-error="first_name"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control {{ $errors->has('last_name') ? 'error' : '' }}" name="last_name"
-                        value="{{ old('last_name') }}" }}>
-
-                    <!-- Error -->
-                    @if ($errors->has('last_name'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('last_name') }}
-
-                        </div>
-                    @endif
+                    <label>Last Name*</label>
+                    <input type="text" class="form-control" name="last_name">
+                    <div class="text-danger error" data-error="last_name"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Passpost size Photo</label>
-                    <input type="file" class="form-control {{ $errors->has('photo') ? 'error' : '' }}" name="photo"
-                        value="{{ old('photo') }}" />
-
-                    <!-- Error -->
-                    @if ($errors->has('photo'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('photo') }}
-
-                        </div>
-                    @endif
+                    <label>Passpost size Photo*</label>
+                    <input type="file" class="form-control" name="photo" />
+                    <div class="text-danger error" data-error="photo"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Date of Birth</label>
-                    <input type="date" class="form-control {{ $errors->has('dob') ? 'error' : '' }}" name="dob"
-                        value="{{ old('dob') }}">
-
-                    <!-- Error -->
-                    @if ($errors->has('dob'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('dob') }}
-
-                        </div>
-                    @endif
+                    <label>Date of Birth*</label>
+                    <input type="date" class="form-control" name="dob">
+                    <div class="text-danger error" data-error="dob"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Age</label>
-                    <input type="text" class="form-control {{ $errors->has('age') ? 'error' : '' }}" name="age"
-                        value="{{ old('age') }}">
-
-                    <!-- Error -->
-                    @if ($errors->has('age'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('age') }}
-
-                        </div>
-                    @endif
+                    <label>Age*</label>
+                    <input type="text" class="form-control" name="age">
+                    <div class="text-danger error" data-error="age"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Sex</label>
-                    <select class="form-control {{ $errors->has('sex') ? 'error' : '' }}" name="sex"
-                        value="{{ old('sex') }}">
+                    <label>Sex*</label>
+                    <select class="form-control" name="sex">
                         <option selected disabled>Choose...</option>
                         <option>Male</option>
                         <option>Female</option>
                         <option>Others</option>
-
                     </select>
-                    <!-- Error -->
-                    @if ($errors->has('sex'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('sex') }}
-
-                        </div>
-                    @endif
+                    <div class="text-danger error" data-error="sex"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Email</label>
-                    <input type="email" class="form-control {{ $errors->has('email') ? 'error' : '' }}" name="email"
-                        value="{{ old('email') }}">
-
-                    <!-- Error -->
-                    @if ($errors->has('email'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('email') }}
-
-                        </div>
-                    @endif
+                    <label>Email*</label>
+                    <input type="email" class="form-control" name="email">
+                    <div class="text-danger error" data-error="email"></div>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>Alternate Email</label>
-                    <input type="email" class="form-control {{ $errors->has('alt_email') ? 'error' : '' }}" name="alt_email"
-                        value="{{ old('alt_email') }}">
-
-                    <!-- Error -->
-                    @if ($errors->has('alt_email'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('alt_email') }}
-
-                        </div>
-                    @endif
+                    <input type="email" class="form-control" name="alt_email">
+                    <div class="text-danger error" data-error="alt_email"></div>
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>Mobile Number*</label>
-                    <input type="text" class="form-control {{ $errors->has('phone') ? 'error' : '' }}" name="phone"
-                        value="{{ old('phone') }}">
+                    <input type="text" class="form-control" name="phone">
+                    <div class="text-danger error" data-error="phone"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('phone'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('phone') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>Alternate Mobile Number</label>
-                    <input type="text" class="form-control {{ $errors->has('alt_phone') ? 'error' : '' }}" name="alt_phone"
-                        value="{{ old('alt_phone') }}">
-
-                    <!-- Error -->
-                    @if ($errors->has('alt_phone'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('alt_phone') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="alt_phone">
+                    <div class="text-danger error" data-error="alt_phone"></div>
                 </div>
 
-                <h1 class="display-5 text-dark text-left col-md-12">Parent details</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Parent details (Any one person is a must)*</h1>
 
                 <div class="form-group col-md-4">
                     <label>Father Name</label>
-                    <input type="text" class="form-control {{ $errors->has('father_name') ? 'error' : '' }}"
-                        name="father_name">
-
-                    <!-- Error -->
-                    @if ($errors->has('father_name'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('father_name') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="father_name">
+                    <div class="text-danger error" data-error="father_name"></div>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label>Father Ph No</label>
-                    <input type="text" class="form-control {{ $errors->has('father_phone') ? 'error' : '' }}"
-                        name="father_phone">
-
-                    <!-- Error -->
-                    @if ($errors->has('father_phone'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('father_phone') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="father_phone">
+                    <div class="text-danger error" data-error="father_phone"></div>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label>Father Occupation</label>
-                    <input type="text" class="form-control {{ $errors->has('father_occupation') ? 'error' : '' }}"
-                        name="father_occupation">
-
-                    <!-- Error -->
-                    @if ($errors->has('father_occupation'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('father_occupation') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="father_occupation">
+                    <div class="text-danger error" data-error="father_occupation"></div>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label>Mother Name</label>
-                    <input type="text" class="form-control {{ $errors->has('mother_name') ? 'error' : '' }}"
-                        name="mother_name">
-
-                    <!-- Error -->
-                    @if ($errors->has('mother_name'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('mother_name') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="mother_name">
+                    <div class="text-danger error" data-error="mother_name"></div>
                 </div>
 
 
                 <div class="form-group col-md-4">
                     <label>Mother Ph No</label>
-                    <input type="text" class="form-control {{ $errors->has('mother_phone') ? 'error' : '' }}"
-                        name="mother_phone">
-
-                    <!-- Error -->
-                    @if ($errors->has('mother_phone'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('mother_phone') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="mother_phone">
+                    <div class="text-danger error" data-error="mother_phone"></div>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label>Mother Occupation</label>
-                    <input type="text" class="form-control {{ $errors->has('Mother_occupation') ? 'error' : '' }}"
-                        name="mother_occupation">
-
-                    <!-- Error -->
-                    @if ($errors->has('mother_occupation'))
-                        <div class="error mother-danger">
-                            {{ $errors->first('mother_occupation') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="mother_occupation">
+                    <div class="text-danger error" data-error="mother_occupation"></div>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label>Gaurdian Name</label>
-                    <input type="text" class="form-control {{ $errors->has('gaurdian_name') ? 'error' : '' }}"
-                        name="gaurdian_name">
-
-                    <!-- Error -->
-                    @if ($errors->has('gaurdian_name'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('gaurdian_name') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="gaurdian_name">
+                    <div class="text-danger error" data-error="gaurdian_name"></div>
                 </div>
 
 
                 <div class="form-group col-md-4">
                     <label>Gaurdian Ph No</label>
-                    <input type="text" class="form-control {{ $errors->has('gaurdian_phone') ? 'error' : '' }}"
-                        name="gaurdian_phone">
-
-                    <!-- Error -->
-                    @if ($errors->has('gaurdian_phone'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('gaurdian_phone') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="gaurdian_phone">
+                    <div class="text-danger error" data-error="gaurdian_phone"></div>
                 </div>
 
                 <div class="form-group col-md-4">
                     <label>Gaurdian Occupation</label>
-                    <input type="text" class="form-control {{ $errors->has('gaurdian_occupation') ? 'error' : '' }}"
-                        name="gaurdain_occupation">
-
-                    <!-- Error -->
-                    @if ($errors->has('gaurdian_occupation'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('gaurdian_occupation') }}
-
-                        </div>
-                    @endif
+                    <input type="text" class="form-control " name="gaurdain_occupation">
+                    <div class="text-danger error" data-error="gaurdian_occupation"></div>
                 </div>
 
                 <h1 class="display-5 text-dark text-left col-md-12">Permanent Address</h1>
 
                 <div class="form-group col-md-6">
                     <label>Address Line1*</label>
-                    <input type="text" class="form-control {{ $errors->has('address_l1') ? 'error' : '' }}"
-                        name="address_l1">
+                    <input type="text" class="form-control" name="address_l1">
+                    <div class="text-danger error" data-error="address_l1"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('address_l1'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('address_l1') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Address Line2</label>
-                    <input type="text" class="form-control {{ $errors->has('address_l2') ? 'error' : '' }}"
-                        name="address_l2">
+                    <label>Address Line2*</label>
+                    <input type="text" class="form-control" name="address_l2">
+                    <div class="text-danger error" data-error="address_l2"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('address_l2'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('address_l2') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>City</label>
-                    <input type="text" class="form-control {{ $errors->has('city') ? 'error' : '' }}" name="city">
+                    <label>City*</label>
+                    <input type="text" class="form-control" name="city">
+                    <div class="text-danger error" data-error="city"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('city'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('city') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>
-                        State / Province
+                        State / Province*
                     </label>
-                    <input type="text" class="form-control {{ $errors->has('state') ? 'error' : '' }}" name="state">
+                    <input type="text" class="form-control" name="state">
+                    <div class="text-danger error" data-error="state"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('state'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('state') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>
-                        Postal / Zip Code
+                        Postal / Zip Code*
                     </label>
-                    <input type="text" class="form-control {{ $errors->has('pincode') ? 'error' : '' }}" name="pincode">
+                    <input type="text" class="form-control" name="pincode">
+                    <div class="text-danger error" data-error="pincode"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('pincode'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('pincode') }}
-
-                        </div>
-                    @endif
                 </div>
 
-
-
-
                 <div class="form-group col-md-6">
-                    <label>Country</label>
-                    <select class="form-control {{ $errors->has('country') ? 'error' : '' }}" name="country">
+                    <label>Country*</label>
+                    <select class="form-control" name="country">
                         <option selected disabled>Choose...</option>
                         <option>India</option>
                         <option>USA</option>
@@ -407,13 +252,7 @@
                         <option>UAE</option>
                         <option>Australia</option>
                     </select>
-                    <!-- Error -->
-                    @if ($errors->has('country'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('country') }}
-
-                        </div>
-                    @endif
+                    <div class="text-danger error" data-error="country"></div>
                 </div>
 
                 <div class="form-check col-md-12 ml-3 mt-3">
@@ -423,89 +262,49 @@
                 </div>
 
 
-                <h1 class="display-5 text-dark text-left col-md-12">Present Address</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Present Address*</h1>
 
                 <div class="form-group col-md-6">
                     <label>Address Line1*</label>
-                    <input type="text" class="form-control {{ $errors->has('present_address_l1') ? 'error' : '' }}"
-                        name="present_address_l1">
+                    <input type="text" class="form-control" name="present_address_l1">
+                    <div class="text-danger error" data-error="present_address_l1"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('present_address_l1'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('present_address_l1') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>Address Line2</label>
-                    <input type="text" class="form-control {{ $errors->has('present_address_l2') ? 'error' : '' }}"
-                        name="present_address_l2">
-
-                    <!-- Error -->
-                    @if ($errors->has('present_address_l2'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('present_address_l2') }}
-
-                        </div>
-                    @endif
+                    <label>Address Line2*</label>
+                    <input type="text" class="form-control" name="present_address_l2">
+                    <div class="text-danger error" data-error="present_address_l2"></div>
                 </div>
 
                 <div class="form-group col-md-6">
-                    <label>City</label>
-                    <input type="text" class="form-control {{ $errors->has('present_city') ? 'error' : '' }}"
-                        name="present_city">
+                    <label>City*</label>
+                    <input type="text" class="form-control" name="present_city">
+                    <div class="text-danger error" data-error="present_city"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('present_city'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('present_city') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>
-                        State / Province
+                        State / Province*
                     </label>
-                    <input type="text" class="form-control {{ $errors->has('present_state') ? 'error' : '' }}"
-                        name="present_state">
+                    <input type="text" class="form-control" name="present_state">
+                    <div class="text-danger error" data-error="present_state"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('present_state'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('present_state') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-6">
                     <label>
-                        Postal / Zip Code
+                        Postal / Zip Code*
                     </label>
-                    <input type="text" class="form-control {{ $errors->has('present_pincode') ? 'error' : '' }}"
-                        name="present_pincode">
+                    <input type="text" class="form-control" name="present_pincode">
+                    <div class="text-danger error" data-error="present_pincode"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('present_pincode'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('present_code') }}
-
-                        </div>
-                    @endif
                 </div>
 
-
-
-
                 <div class="form-group col-md-6">
-                    <label>Country</label>
-                    <select class="form-control {{ $errors->has('present_country') ? 'error' : '' }}"
-                        name="present_country">
+                    <label>Country*</label>
+                    <select class="form-control" name="present_country">
                         <option selected disabled>Choose...</option>
                         <option>India</option>
                         <option>USA</option>
@@ -514,16 +313,10 @@
                         <option>UAE</option>
                         <option>Australia</option>
                     </select>
-                    <!-- Error -->
-                    @if ($errors->has('present_country'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('present_country') }}
-
-                        </div>
-                    @endif
+                    <div class="text-danger error" data-error="present_country"></div>
                 </div>
 
-                <h1 class="display-5 text-dark text-left col-md-12">Education Details</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Education Details*</h1>
                 <table class="table table-bordered" id="dynamicTable">
 
                     <tr>
@@ -556,7 +349,6 @@
 
                         <td><button type="button" name="add" id="add" class="btn btn-success">+</button></td>
 
-
                     </tr>
                     <tr>
                         @if ($errors->has('addmore.*'))
@@ -572,7 +364,7 @@
 
 
 
-                <label class="col-md-12">Select Employee Status</label>
+                <label class="col-md-12">Select Employee Status*</label>
 
 
                 <div class="radio col-md-4">
@@ -580,6 +372,7 @@
                 </div>
                 <div class="radio col-md-4">
                     <label><input type="radio" name="employee_status" value="Self Employed">Self Employed</label>
+
                 </div>
                 <div class="radio col-md-4">
                     <label><input type="radio" name="employee_status" value="Student">Student</label>
@@ -593,59 +386,27 @@
                 <div class="radio col-md-4">
                     <label><input type="radio" name="employee_status" value="Fresher">Fresher</label>
                 </div>
-
-                @if ($errors->has('employee_status'))
-                    <div class="error alert-danger">
-                        {{ $errors->first('employee_status') }}
-
-                    </div>
-                @endif
-
-
+                <div class="text-danger error col-md-12" data-error="employee_status"></div>
 
                 <div class="form-group col-md-4">
-                    <label>Current CTC in number</label>
-                    <input type="text" class="form-control {{ $errors->has('current_ctc') ? 'error' : '' }}"
-                        name="current_ctc">
+                    <label>Current CTC in number*</label>
+                    <input type="text" class="form-control" name="current_ctc">
+                    <div class="text-danger error" data-error="current_ctc"></div>
 
-                    <!-- Error -->
-                    @if ($errors->has('current_ctc'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('current_ctc') }}
-
-                        </div>
-                    @endif
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label>Expected CTC in number</label>
-                    <input type="text" class="form-control {{ $errors->has('expectedt_ctc') ? 'error' : '' }}"
-                        name="expected_ctc">
-
-                    <!-- Error -->
-                    @if ($errors->has('expected_ctc'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('expected_ctc') }}
-
-                        </div>
-                    @endif
+                    <label>Expected CTC in number*</label>
+                    <input type="text" class="form-control" name="expected_ctc">
+                    <div class="text-danger error" data-error="expected_ctc"></div>
                 </div>
 
                 <div class="form-group col-md-4">
-                    <label>Number of years experience in coding</label>
-                    <input type="text" class="form-control {{ $errors->has('experience') ? 'error' : '' }}"
-                        name="experience">
-
-                    <!-- Error -->
-                    @if ($errors->has('experience'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('experience') }}
-
-                        </div>
-                    @endif
+                    <label>Number of years experience in coding*</label>
+                    <input type="text" class="form-control" name="experience">
+                    <div class="text-danger error" data-error="experience"></div>
                 </div>
-
-
+                <label class="col-md-12">Experience (atleast one)*</label>
 
                 <table class="table table-bordered">
 
@@ -665,47 +426,29 @@
                     <tr>
 
                         <td><input type="text" name="company1" class="form-control" />
-                            @if ($errors->has('company1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('company1') }}
+                            <div class="text-danger error" data-error="company1"></div>
 
-                                </div>
-                            @endif
                         </td>
 
                         <td><input type="date" name="from1" class="form-control" />
-                            @if ($errors->has('from1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('from1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="from1"></div>
+
                         </td>
 
                         <td><input type="date" name="to1" class="form-control" />
-                            @if ($errors->has('to1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('to1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="to1"></div>
+
                         </td>
 
                         <td><input type="text" name="accomplishments1" class="form-control" />
-                            @if ($errors->has('accomplishments1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('accomplishments1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="accomplishments1"></div>
+
                         </td>
 
                         <td><input type="text" name="role1" class="form-control" />
-                            @if ($errors->has('role1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('role1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="role1"></div>
+
                         </td>
-
-
 
 
                     </tr>
@@ -713,93 +456,58 @@
                     <tr>
 
                         <td><input type="text" name="company2" class="form-control" />
-                            @if ($errors->has('company2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('company2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="company2"></div>
+
                         </td>
 
                         <td><input type="date" name="from2" class="form-control" />
-                            @if ($errors->has('from2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('from2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="from2"></div>
+
                         </td>
 
                         <td><input type="date" name="to2" class="form-control" />
-                            @if ($errors->has('to2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('to2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="to2"></div>
 
                         </td>
 
                         <td><input type="text" name="accomplishments2" class="form-control" />
-                            @if ($errors->has('accomplishments2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('accomplishments2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="accomplishments2"></div>
 
                         </td>
 
                         <td><input type="text" name="role2" class="form-control" />
-                            @if ($errors->has('role2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('role2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="role2"></div>
+
                         </td>
-
-
 
                     </tr>
 
                     <tr>
 
                         <td><input type="text" name="company3" class="form-control" />
-                            @if ($errors->has('company3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('company3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="company3"></div>
+
                         </td>
 
                         <td><input type="date" name="from3" class="form-control" />
-                            @if ($errors->has('from3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('from3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="from3"></div>
+
                         </td>
 
                         <td><input type="date" name="to3" class="form-control" />
-                            @if ($errors->has('to3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('to3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="to3"></div>
+
                         </td>
 
 
                         <td><input type="text" name="accomplishments3" class="form-control" />
-                            @if ($errors->has('accomplishments3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('accomplishments3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="accomplishments3"></div>
 
                         </td>
 
                         <td><input type="text" name="role3" class="form-control" />
-                            @if ($errors->has('role3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('role3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="role3"></div>
+
                         </td>
 
                     </tr>
@@ -807,43 +515,27 @@
                     <tr>
 
                         <td><input type="text" name="company4" class="form-control" />
-                            @if ($errors->has('company4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('company4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="company5"></div>
+
                         </td>
 
                         <td><input type="date" name="from4" class="form-control" />
-                            @if ($errors->has('from4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('from4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="from4"></div>
+
                         </td>
 
                         <td><input type="date" name="to4" class="form-control" />
-                            @if ($errors->has('to4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('to4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="to4"></div>
+
                         </td>
 
                         <td><input type="text" name="accomplishments4" class="form-control" />
-                            @if ($errors->has('accomplishments4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('accomplishments4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="accomplishments4"></div>
+
                         </td>
 
                         <td><input type="text" name="role4" class="form-control" />
-                            @if ($errors->has('role4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('role4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="role4"></div>
 
                         </td>
 
@@ -852,43 +544,28 @@
                     <tr>
 
                         <td><input type="text" name="company5" class="form-control" />
-                            @if ($errors->has('company5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('company5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="company5"></div>
+
                         </td>
 
                         <td><input type="date" name="from5" class="form-control" />
-                            @if ($errors->has('from5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('from5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="from5"></div>
+
                         </td>
 
                         <td><input type="date" name="to5" class="form-control" />
-                            @if ($errors->has('to5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('to5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="to5"></div>
+
                         </td>
 
                         <td><input type="text" name="accomplishments5" class="form-control" />
-                            @if ($errors->has('accomplishments5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('accomplishments5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="accomplishments5"></div>
+
                         </td>
 
                         <td><input type="text" name="role5" class="form-control" />
-                            @if ($errors->has('role5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('role5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="role5"></div>
+
                         </td>
 
                     </tr>
@@ -897,7 +574,7 @@
 
                 </table>
 
-                <h1 class="display-5 text-dark text-left col-md-12">Top three projects of you</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Top three projects of you(atlest one)*</h1>
 
                 <table class="table table-bordered">
 
@@ -917,35 +594,23 @@
                     <tr>
 
                         <td><input type="text" name="link1" class="form-control" />
-                            @if ($errors->has('link1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('link1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="link1"></div>
+
                         </td>
 
                         <td><input type="text" name="your_role1" class="form-control" />
-                            @if ($errors->has('your_role1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('your_role1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="your_role1"></div>
+
                         </td>
 
                         <td><input type="text" name="skills1" class="form-control" />
-                            @if ($errors->has('skills1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skills1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skills1"></div>
+
                         </td>
 
                         <td><input type="text" name="contribution1" class="form-control" />
-                            @if ($errors->has('contribution1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('contribution1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="contribution1"></div>
+
                         </td>
 
                     </tr>
@@ -953,35 +618,23 @@
                     <tr>
 
                         <td><input type="text" name="link2" class="form-control" />
-                            @if ($errors->has('link2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('link2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="link2"></div>
+
                         </td>
 
                         <td><input type="text" name="your_role2" class="form-control" />
-                            @if ($errors->has('your_role2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('your_role2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="your_role2"></div>
+
                         </td>
 
                         <td><input type="text" name="skills2" class="form-control" />
-                            @if ($errors->has('skills2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skills2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skills2"></div>
+
                         </td>
 
                         <td><input type="text" name="contribution2" class="form-control" />
-                            @if ($errors->has('contribution2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('contribution2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="contribution2"></div>
+
                         </td>
 
 
@@ -990,35 +643,23 @@
                     <tr>
 
                         <td><input type="text" name="link3" class="form-control" />
-                            @if ($errors->has('link3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('link3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="link2"></div>
+
                         </td>
 
                         <td><input type="text" name="your_role3" class="form-control" />
-                            @if ($errors->has('your_role3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('your_role3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="your_role3"></div>
+
                         </td>
 
                         <td><input type="text" name="skills3" class="form-control" />
-                            @if ($errors->has('skills3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skills3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skills3"></div>
+
                         </td>
 
                         <td><input type="text" name="contribution3" class="form-control" />
-                            @if ($errors->has('contribution3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('contribution3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="contribution3"></div>
+
                         </td>
 
 
@@ -1028,7 +669,7 @@
 
 
 
-                <h1 class="display-5 text-dark text-left col-md-12">Self Evaluation of your skills</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Self Evaluation of your skills(atlest one)*</h1>
 
                 <table class="table table-bordered">
 
@@ -1047,7 +688,7 @@
 
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill1') ? 'error' : '' }}" name="skill1">
+                        <td> <select class="form-control" name="skill1">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1072,50 +713,34 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
-                            <!-- Error -->
-                            @if ($errors->has('skill1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill1') }}
+                            <div class="text-danger error" data-error="skill1"></div>
 
-                                </div>
-                            @endif
                         </td>
 
                         <td><input type="text" name="eval1" class="form-control" />
-                            @if ($errors->has('eval1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval1') }}
+                            <div class="text-danger error" data-error="eval1"></div>
 
-                                </div>
-                            @endif
                         </td>
 
                         <td><input type="text" name="sremarks1" class="form-control" />
-                            @if ($errors->has('sremarks1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks1') }}
+                            <div class="text-danger error" data-error="sremarks1"></div>
 
-                                </div>
-                            @endif
                         </td>
 
                         <td><input type="text" name="exp1" class="form-control" />
-                            @if ($errors->has('exp1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp1') }}
+                            <div class="text-danger error" data-error="exp1"></div>
 
-                                </div>
-                            @endif
                         </td>
 
                     </tr>
 
-
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill2') ? 'error' : '' }}" name="skill2">
+                        <td> <select class="form-control" name="skill2">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1140,48 +765,34 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
-
-                            @if ($errors->has('skill2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill2') }}
-
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skill2"></div>
 
                         </td>
 
                         <td><input type="text" name="eval2" class="form-control" />
-                            @if ($errors->has('eval2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval2') }}
+                            <div class="text-danger error" data-error="eval2"></div>
 
-                                </div>
-                            @endif
                         </td>
 
                         <td><input type="text" name="sremarks2" class="form-control" />
-                            @if ($errors->has('sremarks2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks2"></div>
+
                         </td>
 
                         <td><input type="text" name="exp2" class="form-control" />
-                            @if ($errors->has('exp2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp2"></div>
+
                         </td>
 
                     </tr>
 
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill3') ? 'error' : '' }}" name="skill3">
+                        <td> <select class="form-control" name="skill3">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1206,44 +817,33 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
-
+                                <option>Redis</option>
+                                <option>Python</option>
                             </select>
-                            @if ($errors->has('skill3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skill3"></div>
+
                         </td>
 
                         <td><input type="text" name="eval3" class="form-control" />
-                            @if ($errors->has('eval3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="eval3"></div>
+
                         </td>
 
                         <td><input type="text" name="sremarks3" class="form-control" />
-                            @if ($errors->has('sremarks3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks3"></div>
+
                         </td>
 
                         <td><input type="text" name="exp3" class="form-control" />
-                            @if ($errors->has('exp3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp3"></div>
+
                         </td>
 
                     </tr>
 
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill4') ? 'error' : '' }}" name="skill4">
+                        <td> <select class="form-control" name="skill4">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1268,44 +868,34 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
-                            @if ($errors->has('skill4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skill4"></div>
+
                         </td>
 
                         <td><input type="text" name="eval4" class="form-control" />
-                            @if ($errors->has('eval4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="eval4"></div>
+
                         </td>
 
                         <td><input type="text" name="sremarks4" class="form-control" />
-                            @if ($errors->has('sremarks4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks"></div>
+
                         </td>
 
                         <td><input type="text" name="exp4" class="form-control" />
-                            @if ($errors->has('exp4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp4"></div>
+
                         </td>
 
                     </tr>
 
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill5') ? 'error' : '' }}" name="skill5">
+                        <td> <select class="form-control" name="skill5">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1330,37 +920,27 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
-                            @if ($errors->has('skill5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skill5"></div>
+
                         </td>
 
                         <td><input type="text" name="eval5" class="form-control" />
-                            @if ($errors->has('eval5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="eval5"></div>
+
                         </td>
 
                         <td><input type="text" name="sremarks5" class="form-control" />
-                            @if ($errors->has('sremarks5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks5"></div>
+
                         </td>
 
                         <td><input type="text" name="exp5" class="form-control" />
-                            @if ($errors->has('exp5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp5"></div>
+
                         </td>
 
                     </tr>
@@ -1368,7 +948,7 @@
 
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill6') ? 'error' : '' }}" name="skill6">
+                        <td> <select class="form-control" name="skill6">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1393,45 +973,35 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
-                            @if ($errors->has('skill6'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill6') }}
-                                </div>
-                            @endif
+
+                            <div class="text-danger error" data-error="skill6"></div>
+
                         </td>
 
                         <td><input type="text" name="eval6" class="form-control" />
-                            @if ($errors->has('eval6'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval6') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="eval6"></div>
+
                         </td>
 
                         <td><input type="text" name="sremarks6" class="form-control" />
-                            @if ($errors->has('sremarks6'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks6') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks6"></div>
+
                         </td>
 
                         <td><input type="text" name="exp6" class="form-control" />
-                            @if ($errors->has('exp6'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp6') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp6"></div>
+
                         </td>
 
                     </tr>
 
-
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill7') ? 'error' : '' }}" name="skill7">
+                        <td> <select class="form-control" name="skill7">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1456,44 +1026,34 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
-                            @if ($errors->has('skill7'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill7') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skill7"></div>
+
                         </td>
 
                         <td><input type="text" name="eval7" class="form-control" />
-                            @if ($errors->has('eval7'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval7') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="eval7"></div>
+
                         </td>
 
                         <td><input type="text" name="sremarks7" class="form-control" />
-                            @if ($errors->has('sremarks7'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks7') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks7"></div>
+
                         </td>
 
                         <td><input type="text" name="exp7" class="form-control" />
-                            @if ($errors->has('exp7'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp7') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp7"></div>
+
                         </td>
 
                     </tr>
 
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill8') ? 'error' : '' }}" name="skill8">
+                        <td> <select class="form-control" name="skill8">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1518,44 +1078,34 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
-                            @if ($errors->has('skill8'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill8') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skill8"></div>
+
                         </td>
 
                         <td><input type="text" name="eval8" class="form-control" />
-                            @if ($errors->has('eval8'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval8') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="eval8"></div>
+
                         </td>
 
                         <td><input type="text" name="sremarks8" class="form-control" />
-                            @if ($errors->has('sremarks8'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks8') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks8"></div>
+
                         </td>
 
                         <td><input type="text" name="exp8" class="form-control" />
-                            @if ($errors->has('exp8'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp8') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp8"></div>
+
                         </td>
 
                     </tr>
 
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill9') ? 'error' : '' }}" name="skill9">
+                        <td> <select class="form-control" name="skill9">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1580,44 +1130,34 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
                             </select>
-                            @if ($errors->has('skill9'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill9') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skill9"></div>
+
                         </td>
 
                         <td><input type="text" name="eval9" class="form-control" />
-                            @if ($errors->has('eval9'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval9') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="eval9"></div>
+
                         </td>
 
                         <td><input type="text" name="sremarks9" class="form-control" />
-                            @if ($errors->has('sremarks9'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks9') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks9"></div>
+
                         </td>
 
                         <td><input type="text" name="exp9" class="form-control" />
-                            @if ($errors->has('exp9'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp9') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp9"></div>
+
                         </td>
 
                     </tr>
 
                     <tr>
 
-                        <td> <select class="form-control {{ $errors->has('skill10') ? 'error' : '' }}" name="skill10">
+                        <td> <select class="form-control" name="skill10">
                                 <option selected disabled>Choose...</option>
                                 <option>HTML</option>
                                 <option>CSS</option>
@@ -1642,38 +1182,28 @@
                                 <option>Web RTC</option>
                                 <option>Angular</option>
                                 <option>Laravel</option>
+                                <option>Redis</option>
+                                <option>Python</option>
 
 
                             </select>
-                            @if ($errors->has('skill10'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('skill10') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="skill10"></div>
+
                         </td>
 
                         <td><input type="text" name="eval10" class="form-control" />
-                            @if ($errors->has('eval10'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('eval10') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="eval10"></div>
+
                         </td>
 
                         <td><input type="text" name="sremarks10" class="form-control" />
-                            @if ($errors->has('sremarks10'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('sremarks10') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="sremarks"></div>
+
                         </td>
 
                         <td><input type="text" name="exp10" class="form-control" />
-                            @if ($errors->has('exp10'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('exp10') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="exp10"></div>
+
                         </td>
 
                     </tr>
@@ -1699,39 +1229,24 @@
 
                     <tr>
 
-                        <td> <input type="text" class="form-control {{ $errors->has('add_skill1') ? 'error' : '' }}"
-                                name="add_skill1">
-
-                            @if ($errors->has('add_skill1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_skill1') }}
-                                </div>
-                            @endif
+                        <td> <input type="text" class="form-control" name="add_skill1">
+                            <div class="text-danger error" data-error="add_skill1"></div>
 
                         </td>
 
                         <td><input type="text" name="add_eval1" class="form-control" />
-                            @if ($errors->has('add_eval1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_eval1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_eval1"></div>
+
                         </td>
 
                         <td><input type="text" name="add_sremarks1" class="form-control" />
-                            @if ($errors->has('add_sremarks1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_sremarks1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_sremarks1"></div>
+
                         </td>
 
                         <td><input type="text" name="add_exp1" class="form-control" />
-                            @if ($errors->has('add_exp1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_exp1') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_exp1"></div>
+
                         </td>
 
                     </tr>
@@ -1739,38 +1254,24 @@
 
                     <tr>
 
-                        <td> <input type="text" class="form-control {{ $errors->has('add_skill2') ? 'error' : '' }}"
-                                name="add_skill2">
-                            @if ($errors->has('add_skill2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_skill2') }}
-                                </div>
-                            @endif
+                        <td> <input type="text" class="form-control" name="add_skill2">
+                            <div class="text-danger error" data-error="add_skill2"></div>
 
                         </td>
 
                         <td><input type="text" name="add_eval2" class="form-control" />
-                            @if ($errors->has('add_eval2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_eval2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_eval2"></div>
+
                         </td>
 
                         <td><input type="text" name="add_sremarks2" class="form-control" />
-                            @if ($errors->has('add_sremarks2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_sremarks2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_sremarks"></div>
+
                         </td>
 
                         <td><input type="text" name="add_exp2" class="form-control" />
-                            @if ($errors->has('add_exp2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_exp2') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_exp2"></div>
+
                         </td>
 
                     </tr>
@@ -1778,114 +1279,72 @@
                     <tr>
 
 
-                        <td> <input type="text" class="form-control {{ $errors->has('add_skill3') ? 'error' : '' }}"
-                                name="add_skill3">
-
-                            @if ($errors->has('add_skill3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_skill3') }}
-                                </div>
-                            @endif
+                        <td> <input type="text" class="form-control" name="add_skill3">
+                            <div class="text-danger error" data-error="add_skill3"></div>
 
                         </td>
 
                         <td><input type="text" name="add_eval3" class="form-control" />
-                            @if ($errors->has('add_eval3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_eval3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_eval3"></div>
+
                         </td>
 
                         <td><input type="text" name="add_sremarks3" class="form-control" />
-                            @if ($errors->has('add_sremarks3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_sremarks3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_sremarks"></div>
+
                         </td>
 
                         <td><input type="text" name="add_exp3" class="form-control" />
-                            @if ($errors->has('add_exp3'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_exp3') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_exp3"></div>
+
                         </td>
 
                     </tr>
 
                     <tr>
 
-                        <td> <input type="text" class="form-control {{ $errors->has('add_skill4') ? 'error' : '' }}"
-                                name="add_skill4">
-                            @if ($errors->has('add_skill4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_skill4') }}
-                                </div>
-                            @endif
+                        <td> <input type="text" class="form-control" name="add_skill4">
+                            <div class="text-danger error" data-error="add_skill4"></div>
+
                         </td>
 
                         <td><input type="text" name="add_eval4" class="form-control" />
-                            @if ($errors->has('add_eval4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_eval4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_eval4"></div>
+
                         </td>
 
                         <td><input type="text" name="add_sremarks4" class="form-control" />
-                            @if ($errors->has('add_sremarks4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_sremarks4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_sremarks4"></div>
+
                         </td>
 
                         <td><input type="text" name="add_exp4" class="form-control" />
-                            @if ($errors->has('add_exp4'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_exp4') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_exp4"></div>
+
                         </td>
 
                     </tr>
 
                     <tr>
 
-                        <td> <input type="text" class="form-control {{ $errors->has('add_skill5') ? 'error' : '' }}"
-                                name="add_skill5">
-                            @if ($errors->has('add_skill5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_skill5') }}
-                                </div>
-                            @endif
+                        <td> <input type="text" class="form-control" name="add_skill5">
+                            <div class="text-danger error" data-error="add_skill5"></div>
 
                         </td>
 
                         <td><input type="text" name="add_eval5" class="form-control" />
-                            @if ($errors->has('add_eval5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_eval5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_eval5"></div>
+
                         </td>
 
                         <td><input type="text" name="add_sremarks5" class="form-control" />
-                            @if ($errors->has('add_sremarks5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_sremarks5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_sremarks5"></div>
+
                         </td>
 
                         <td><input type="text" name="add_exp5" class="form-control" />
-                            @if ($errors->has('add_exp5'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('add_exp5') }}
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="add_exp5"></div>
+
                         </td>
 
                     </tr>
@@ -1896,34 +1355,32 @@
 
 
                 <label class="col-md-12">Special Category Information (if any, optional to share)</label>
+                <div class="text-danger error" data-error="spl_category"></div>
 
+                    <div class="radio col-md-3">
+                        <label><input type="checkbox" name="spl_category" value="Differently Abled">Differently
+                            Abled</label>
+                    </div>
+                    <div class="radio col-md-3">
+                        <label><input type="checkbox" name="spl_category" value="From Martyr Family">From Martyr
+                            Family</label>
+                    </div>
+                    <div class="radio col-md-3">
+                        <label><input type="checkbox" name="spl_category" value="Single/No Parent">Single/No Parent</label>
+                    </div>
+                    <div class="radio col-md-3">
+                        <label><input type="checkbox" name="spl_category" value="None">None</label>
+                    </div>
 
-                <div class="radio col-md-3">
-                    <label><input type="radio" name="spl_category" value="Differently Abled">Differently Abled</label>
-                </div>
-                <div class="radio col-md-3">
-                    <label><input type="radio" name="spl_category" value="From Martyr Family">From Martyr Family</label>
-                </div>
-                <div class="radio col-md-3">
-                    <label><input type="radio" name="spl_category" value="Single/No Parent">Single/No Parent</label>
-                </div>
-                <div class="radio col-md-3">
-                    <label><input type="radio" name="spl_category" value="None">None</label>
-                </div>
 
                 <div class="form-group col-md-6">
                     <label>Special Category details</label>
-                    <input type="text" class="form-control {{ $errors->has('spl_category_details') ? 'error' : '' }}"
-                        name="spl_category_details">
-                    @if ($errors->has('spl_category_details'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('spl_category_details') }}
-                        </div>
-                    @endif
+                    <input type="text" class="form-control" name="spl_category_details">
+                    <div class="text-danger error" data-error="spl_category_details"></div>
                 </div>
 
 
-                <h1 class="display-5 text-dark text-left col-md-12">Contact details for reference</h1>
+                <h1 class="display-5 text-dark text-left col-md-12">Contact details for reference*</h1>
 
                 <table class="table table-bordered">
 
@@ -1937,45 +1394,26 @@
 
                         <th>Relation</th>
 
-
                     </tr>
-
-
 
                     <tr>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_name') ? 'error' : '' }}"
-                                name="ref_name">
+                        <td><input type="text" class="form-control" name="ref_name">
+                            <div class="text-danger error" data-error="ref_name"></div>
 
-                            @if ($errors->has('ref_name'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_name') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_number') ? 'error' : '' }}"
-                                name="ref_number">
+                        <td><input type="text" class="form-control" name="ref_number">
+                            <div class="text-danger error" data-error="ref_number"></div>
 
-                            @if ($errors->has('ref_number'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_number') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_occupation') ? 'error' : '' }}"
-                                name="ref_occupation">
+                        <td><input type="text" class="form-control" name="ref_occupation">
+                            <div class="text-danger error" data-error="ref_occupation"></div>
 
-                            @if ($errors->has('ref_occupation'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_occupation') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td> <select class="form-control {{ $errors->has('ref_relation') ? 'error' : '' }}"
-                                name="ref_relation">
+                        <td> <select class="form-control " name="ref_relation">
                                 <div id="skillsDropDown">
                                     <option selected disabled>Choose...</option>
                                     <option>Relative</option>
@@ -1985,52 +1423,29 @@
                                     <option>Known Person</option>
                                 </div>
                             </select>
-                            <!-- Error -->
-                            @if ($errors->has('ref_relation'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_relation') }}
-
-                                </div>
-                            @endif
+                            <div class="text-danger error" data-error="ref_relation"></div>
                         </td>
-
                     </tr>
 
 
                     <tr>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_name1') ? 'error' : '' }}"
-                                name="ref_name1">
+                        <td><input type="text" class="form-control" name="ref_name1">
+                            <div class="text-danger error" data-error="ref_name1"></div>
 
-                            @if ($errors->has('ref_name1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_name1') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_number1') ? 'error' : '' }}"
-                                name="ref_number1">
+                        <td><input type="text" class="form-control" name="ref_number1">
+                            <div class="text-danger error" data-error="ref_number1"></div>
 
-                            @if ($errors->has('ref_number1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_number1') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_occupation1') ? 'error' : '' }}"
-                                name="ref_occupation1">
+                        <td><input type="text" class="form-control" name="ref_occupation1">
+                            <div class="text-danger error" data-error="ref_occupation1"></div>
 
-                            @if ($errors->has('ref_occupation1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_occupation1') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td> <select class="form-control {{ $errors->has('ref_relation1') ? 'error' : '' }}"
-                                name="ref_relation1">
+                        <td> <select class="form-control" name="ref_relation1">
                                 <div id="skillsDropDown">
                                     <option selected disabled>Choose...</option>
                                     <option>Relative</option>
@@ -2040,13 +1455,8 @@
                                     <option>Known Person</option>
                                 </div>
                             </select>
-                            <!-- Error -->
-                            @if ($errors->has('ref_relation1'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_relation1') }}
+                            <div class="text-danger error" data-error="ref_relation1"></div>
 
-                                </div>
-                            @endif
                         </td>
 
                     </tr>
@@ -2054,38 +1464,22 @@
 
                     <tr>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_name2') ? 'error' : '' }}"
-                                name="ref_name2">
+                        <td><input type="text" class="form-control" name="ref_name2">
+                            <div class="text-danger error" data-error="ref_name2"></div>
 
-                            @if ($errors->has('ref_name2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_name2') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_number2') ? 'error' : '' }}"
-                                name="ref_number2">
+                        <td><input type="text" class="form-control" name="ref_number2">
+                            <div class="text-danger error" data-error="ref_number2"></div>
 
-                            @if ($errors->has('ref_number2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_number2') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td><input type="text" class="form-control {{ $errors->has('ref_occupation2') ? 'error' : '' }}"
-                                name="ref_occupation2">
+                        <td><input type="text" class="form-control" name="ref_occupation2">
+                            <div class="text-danger error" data-error="ref_occupation2"></div>
 
-                            @if ($errors->has('ref_occupation2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_occupation2') }}
-                                </div>
-                            @endif
                         </td>
 
-                        <td> <select class="form-control {{ $errors->has('ref_relation2') ? 'error' : '' }}"
-                                name="ref_relation2">
+                        <td> <select class="form-control" name="ref_relation2">
                                 <div id="skillsDropDown">
                                     <option selected disabled>Choose...</option>
                                     <option>Relative</option>
@@ -2095,13 +1489,8 @@
                                     <option>Known Person</option>
                                 </div>
                             </select>
-                            <!-- Error -->
-                            @if ($errors->has('ref_relation2'))
-                                <div class="error alert-danger">
-                                    {{ $errors->first('ref_relation2') }}
+                            <div class="text-danger error" data-error="ref_relation2"></div>
 
-                                </div>
-                            @endif
                         </td>
 
                     </tr>
@@ -2123,95 +1512,55 @@
 
                     <div class="form-group col-md-3">
                         <label>Partner Name</label>
-                        <input type="text" class="form-control {{ $errors->has('partner_name') ? 'error' : '' }}"
-                            name="partner_name">
-
-                        @if ($errors->has('partner_name'))
-                            <div class="error alert-danger">
-                                {{ $errors->first('partner_name') }}
-                            </div>
-                        @endif
+                        <input type="text" class="form-control" name="partner_name">
+                        <div class="text-danger error" data-error="partner_name"></div>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label>Mobile Number</label>
-                        <input type="text" class="form-control {{ $errors->has('partner_number') ? 'error' : '' }}"
-                            name="partner_number">
-
-                        @if ($errors->has('partner_number'))
-                            <div class="error alert-danger">
-                                {{ $errors->first('partner_number') }}
-                            </div>
-                        @endif
+                        <input type="text" class="form-control " name="partner_number">
+                        <div class="text-danger error" data-error="partner_number"></div>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label>Partner Company Name</label>
-                        <input type="text" class="form-control {{ $errors->has('partner_company_name') ? 'error' : '' }}"
-                            name="partner_company_name">
-
-                        @if ($errors->has('partner_company_name'))
-                            <div class="error alert-danger">
-                                {{ $errors->first('partner_company_name') }}
-                            </div>
-                        @endif
+                        <input type="text" class="form-control" name="partner_company_name">
+                        <div class="text-danger error" data-error="partner_company_name"></div>
                     </div>
 
                     <div class="form-group col-md-3">
                         <label>Partner Email-id</label>
-                        <input type="text" class="form-control {{ $errors->has('partner_email') ? 'error' : '' }}"
-                            name="partner_email">
-
-                        @if ($errors->has('partner_email'))
-                            <div class="error alert-danger">
-                                {{ $errors->first('partner_email') }}
-                            </div>
-                        @endif
+                        <input type="text" class="form-control" name="partner_email">
+                        <div class="text-danger error" data-error="partner_email"></div>
                     </div>
 
                 </div>
 
                 <div class="form-group col-md-4 mt-3">
-                    <label>Available start date</label>
-                    <input type="date" class="form-control {{ $errors->has('avl_date') ? 'error' : '' }}" name="avl_date">
-
-                    @if ($errors->has('avl_date'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('avl_date') }}
-                        </div>
-                    @endif
+                    <label>Available start date*</label>
+                    <input type="date" class="form-control" name="avl_date">
+                    <div class="text-danger error" data-error="avl_date"></div>
                 </div>
 
                 <div class="form-group col-md-4 mt-3">
-                    <label>Linkedin Profile Link</label>
-                    <input type="text" class="form-control {{ $errors->has('linkedin') ? 'error' : '' }}" name="linkedin">
-
-                    @if ($errors->has('linkedin'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('linkedin') }}
-                        </div>
-                    @endif
+                    <label>Linkedin Profile Link*</label>
+                    <input type="text" class="form-control" name="linkedin">
+                    <div class="text-danger error" data-error="linkedin"></div>
                 </div>
 
                 <div class="form-group col-md-4 mt-3">
-                    <label>Facebook Profile</label>
-                    <input type="text" class="form-control {{ $errors->has('facebook') ? 'error' : '' }}" name="facebook">
-
-                    @if ($errors->has('facebook'))
-                        <div class="error alert-danger">
-                            {{ $errors->first('facebook') }}
-                        </div>
-                    @endif
+                    <label>Facebook Profile*</label>
+                    <input type="text" class="form-control " name="facebook">
+                    <div class="text-danger error" data-error="facebook"></div>
                 </div>
-
-                <input type="submit" value="Submit" class="btn btn-dark btn-block">
-                @if (session()->has('success'))
-                    <div class="alert alert-success">
-                        {{ session()->get('success') }}
-                    </div>
-                @endif
+                <input type="submit" value="Submit" class="btn ac-button btn-block">
+                <p style="visibility:hidden;" class="text-center text-danger col-md-12" id="error-desc">Please check some
+                    filed is invalid above modify and submit again</p>
             </div>
+
     </div>
+    <div id="spinner"></div>
+
 
     </div>
 
@@ -2261,9 +1610,7 @@
                 i +
                 '][remarks]"  class="form-control" required/></td><td><button type="button" class="btn btn-danger remove-tr">-</button></td></tr>'
             );
-
         });
-
         $(document).on('click', '.remove-tr', function() {
 
             $(this).parents('tr').remove();
@@ -2271,6 +1618,57 @@
         });
 
     </script>
+
+    <script>
+        $(document).ready(function() {
+
+            $('#job_form').on('submit', function(event) {
+                const spinner = document.getElementById("spinner");
+                spinner.className = "show";
+                event.preventDefault();
+                $('.error').html('');
+                $.ajax({
+                    url: "{{ route('apply-job') }}",
+                    method: "POST",
+                    data: new FormData(this),
+                    dataType: 'JSON',
+                    contentType: false,
+                    cache: false,
+                    processData: false,
+                    success: function(data) {
+
+                        spinner.className = spinner.className.replace("show", "");
+
+
+                        console.log("done");
+                        window.location.href = "{{ route('thankyou') }}";
+
+                    },
+                    error: function(error) {
+
+                        spinner.className = spinner.className.replace("show", "");
+
+
+                        let errors = error.responseJSON.errors
+                        for (let key in errors) {
+                            let errorDiv = $(`.error[data-error="${key}"]`);
+                            if (errorDiv.length) {
+
+                                errorDiv.text(errors[key][0]);
+                            }
+                        }
+                        document.getElementById("error-desc").style.visibility = "visible";
+                    }
+                })
+            });
+
+        });
+
+    </script>
+
+
+
+
 
     </div>
 @endsection

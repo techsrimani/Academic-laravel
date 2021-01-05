@@ -30,7 +30,7 @@ class JobSubmitUserMail extends Mailable
     {
         return $this->from('srimanibilla@gmail.com')
                     ->to($this->application->email)
-                    ->subject('We have received your Job application')
+                    ->subject('We have received your Job application for '.$this->application->position)
                     ->view('job_submit_user_mail')
                     ->with('data', $this->application);
     }

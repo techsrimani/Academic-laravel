@@ -2,22 +2,34 @@
     .text-center {
         text-align: center !important;
     }
-    body{
+
+    body {
+        background-color: #0DDBFE;
         padding: 50px;
     }
+
+    .logo {
+
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 </style>
+<img class="logo" src="http://localhost:8000/images/logo3.jpg" alt="logo">
 <h1 class="text-center">
     {{ $application->first_name . ' ' . $application->last_name }}'s application for
-    job {{ $application->position }}</h1>
+    job {{ $application->position }}
+</h1>
 
-<img src="{{ URL::to('/') }}/public/images/{{ $application->photo }}" alt="..."
-    class="img-thumbnail col-md-3 mb-5">
+<img src="{{ URL::to('/') }}/public/images/{{ $application->photo }}" alt="..." class="img-thumbnail col-md-3 mb-5">
 
 <table style="width:100%; border:1px solid black">
     <tr style="border:1px solid black">
         <td style="border:1px solid black">Full Name</td>
         <td style="border:1px solid black">
-            {{ $application->first_name . ' ' . $application->last_name }}</td>
+            {{ $application->first_name . ' ' . $application->last_name }}
+        </td>
     </tr>
     <tr style="border:1px solid black">
         <td style="border:1px solid black">For Position </td>
@@ -100,7 +112,8 @@
     <tr style="border:1px solid black">
         <td style="border:1px solid black">Address line 1</td>
         <td style="border:1px solid black">
-            {{ $application->address_l1 }}</td>
+            {{ $application->address_l1 }}
+        </td>
     </tr>
     <tr style="border:1px solid black">
         <td style="border:1px solid black">Address line2</td>
@@ -164,7 +177,7 @@
         <th style="border:1px solid black">Aggregate</th>
         <th style="border:1px solid black">Remarks</th>
     </tr>
-    @foreach($application->educationDetails as $edu)
+    @foreach ($application->educationDetails as $edu)
         <tr style="border:1px solid black">
             <td style="border:1px solid black">{{ $edu->degree }}</td>
             <td style="border:1px solid black">{{ $edu->institute }}</td>
@@ -209,21 +222,21 @@
         <th style="border:1px solid black">Accomplishments</th>
     </tr>
     <tr style="border:1px solid black">
-        <td style="border:1px solid black">{{$application->company1 }}</td>
+        <td style="border:1px solid black">{{ $application->company1 }}</td>
         <td style="border:1px solid black">{{ $application->role1 }}</td>
         <td style="border:1px solid black">{{ $application->from1 }}</td>
         <td style="border:1px solid black">{{ $application->to1 }}</td>
         <td style="border:1px solid black">{{ $application->accomplishments1 }}</td>
     </tr>
     <tr style="border:1px solid black">
-        <td style="border:1px solid black">{{$application->company2 }}</td>
+        <td style="border:1px solid black">{{ $application->company2 }}</td>
         <td style="border:1px solid black">{{ $application->role2 }}</td>
         <td style="border:1px solid black">{{ $application->from2 }}</td>
         <td style="border:1px solid black">{{ $application->to2 }}</td>
         <td style="border:1px solid black">{{ $application->accomplishments2 }}</td>
     </tr>
     <tr style="border:1px solid black">
-        <td style="border:1px solid black">{{$application->company3 }}</td>
+        <td style="border:1px solid black">{{ $application->company3 }}</td>
         <td style="border:1px solid black">{{ $application->role3 }}</td>
         <td style="border:1px solid black">{{ $application->from3 }}</td>
         <td style="border:1px solid black">{{ $application->to3 }}</td>

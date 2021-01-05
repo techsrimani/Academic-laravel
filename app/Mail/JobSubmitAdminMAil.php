@@ -32,7 +32,7 @@ class JobSubmitAdminMAil extends Mailable
     {
         return $this->from('srimanibilla@gmail.com')
                     ->to('srimani@academicconnect.in')
-                    ->subject('We have received your request')
+                    ->subject('We have received a application for '.$this->application->position)
                     ->view('job_submit_admin_mail')
                     ->with('data', $this->application);
     }
